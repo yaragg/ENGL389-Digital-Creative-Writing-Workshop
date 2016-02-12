@@ -139,8 +139,12 @@ a:hover{
 	font-size: 270%;
 }
 
-#ui-body-close, #ui-body.dialog {
+#ui-body.dialog {
     margin-top: 15%;
+}
+
+#ui-body-close {
+    margin-top: 30%;
 }
 
 #ui-body{
@@ -162,7 +166,14 @@ a:hover{
 [[Add three drops of blood.]]
 
 [[Add bat wings.]]</tw-passagedata>
-<tw-passagedata pid="3" name="Pour alcohol into cauldron." tags="" position="655,425">&lt;&lt;RecipeList&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="3" name="Pour alcohol into cauldron." tags="alcohol" position="655,425">&lt;&lt;RecipeList&gt;&gt;
+That&#39;s not enough. [[Add wine!]]
+
+[[Add liquid fire.]]
+
+[[Pour water into cauldron.]] 
+
+[[Add salt.]] </tw-passagedata>
 <tw-passagedata pid="4" name="Pour chicken broth into cauldron." tags="food" position="804,429">&lt;&lt;RecipeList&gt;&gt;
 
 [[Add salt.]] 
@@ -206,9 +217,21 @@ a:hover{
 
 [[Add leek.]]</tw-passagedata>
 <tw-passagedata pid="18" name="Add leek." tags="food nonsense" position="953,877">Double-click this passage to edit it.</tw-passagedata>
-<tw-passagedata pid="19" name="Wait for it to boil." tags="" position="361,873">&lt;&lt;AddItem&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;if visitedTags(&quot;food&quot;) eq (turns()-2)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Enjoy the yummy soup.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;elseif visitedTags(&quot;creepy&quot;) gt visitedTags(&quot;magic&quot;) and visitedTags(&quot;nonsense&quot;) eq 0&gt;&gt;&lt;&lt;set $recipe.push(&quot;Summon Cthlhu.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Witness the end of mankind as we know it.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;List&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="19" name="Wait for it to boil." tags="" position="361,873">&lt;&lt;AddItem&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;if visitedTags(&quot;food&quot;) eq (turns()-2)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Enjoy the yummy soup.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;elseif visitedTags(&quot;creepy&quot;) gt visitedTags(&quot;magic&quot;) and visitedTags(&quot;nonsense&quot;) eq 0&gt;&gt;&lt;&lt;set $recipe.push(&quot;Summon Cthlhu.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Witness the end of mankind as we know it.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;elseif visitedTags(&quot;alcohol&quot;) gt 2&gt;&gt;&lt;&lt;set $recipe.push(&quot;Keep adding more and more alcohol.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Get the professor to stick you in Alcoholics Anonymous.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;set $recipe.push(&quot;Choke on the stench.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Blame the textbook.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;
+&lt;&lt;/if&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;List&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="20" name="List" tags="widget" position="500,79">&lt;&lt;widget &quot;List&quot;&gt;&gt;&lt;&lt;if $recipe&gt;&gt;&lt;&lt;for $i to 0; $i lt $recipe.length; $i++&gt;&gt;&lt;&lt;print ($i+1) + &quot;. &quot; + $recipe[$i]+&quot;&lt;br/&gt;&quot;&gt;&gt;&lt;&lt;/for&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="21" name="AddItem" tags="widget" position="664,82">&lt;&lt;widget &quot;AddItem&quot;&gt;&gt;&lt;&lt;if $recipe&gt;&gt;&lt;&lt;set $recipe.push(passage())&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="22" name="Add wine!" tags="alcohol" position="841,260">&lt;&lt;RecipeList&gt;&gt;
+That&#39;s not enough. [[Add more wine!|Add wine!]]
+
+[[Add liquid fire.]]
+
+[[Pour water into cauldron.]] 
+
+[[Add lizard eyes.]] 
+
+&lt;&lt;if turns() gt 3&gt;&gt;[[Wait for it to boil.]]&lt;&lt;/if&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="23" name="Add liquid fire." tags="" position="1132,189">&lt;&lt;AddItem&gt;&gt;&lt;&lt;set $recipe.push(&quot;Blow up the room. What did you expect?&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Die.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;List&gt;&gt;</tw-passagedata>
 </tw-storydata>
 </div>
 	<script id="script-sugarcube" type="text/javascript">
