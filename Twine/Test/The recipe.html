@@ -77,6 +77,10 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 
 }
 
+#story-author{
+	font-size: 85%;
+}
+
 em{
 	text-decoration: underline;
 }
@@ -121,7 +125,13 @@ body{
 }
 
 .content{
-	
+	height: 750px;
+	overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
 }
 
 a{
@@ -144,13 +154,18 @@ a:hover{
 }
 
 #ui-body-close {
-    margin-top: 30%;
+    margin-top: 50%;
+	 display: none;
 }
 
 #ui-body{
 	  background-color: rgba(255, 255, 255, 0.8);
     font-size: 250%;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">
+}
+
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">
+
+
 </script><tw-passagedata pid="1" name="Untitled Passage" tags="" position="507,277">[[Pour water into cauldron.]]
 
 [[Pour alcohol into cauldron.]]
@@ -165,73 +180,159 @@ a:hover{
 
 [[Add three drops of blood.]]
 
-[[Add bat wings.]]</tw-passagedata>
+[[Add bat wings.]]
+
+[[Grind dragon bone into dust and sprinkle.]]       &lt;a target=&quot;_blank&quot;  href=&quot;http://runescape.wikia.com/wiki/Dragon_bones&quot;&gt;[?]&lt;/a&gt; &lt;&lt;Boil&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="3" name="Pour alcohol into cauldron." tags="alcohol" position="655,425">&lt;&lt;RecipeList&gt;&gt;
 That&#39;s not enough. [[Add wine!]]
 
-[[Add liquid fire.]]
+[[Add liquid fire.]]       &lt;a target=&quot;_blank&quot;  href=&quot;https://br.pinterest.com/pin/3870349654244787/&quot;&gt;[?]&lt;/a&gt;
 
 [[Pour water into cauldron.]] 
 
-[[Add salt.]] </tw-passagedata>
-<tw-passagedata pid="4" name="Pour chicken broth into cauldron." tags="food" position="804,429">&lt;&lt;RecipeList&gt;&gt;
+[[Add salt.]] &lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="4" name="Pour chicken broth into cauldron." tags="food" position="805,428">&lt;&lt;RecipeList&gt;&gt;
 
 [[Add salt.]] 
 
-[[Add lizard eyes.]]
+[[Add lizard eyes.]]       &lt;a target=&quot;_blank&quot;  href=&quot;https://en.wikivet.net/Lizard_Eye&quot;&gt;[?]&lt;/a&gt;
 
-[[Add dragon scales.]]</tw-passagedata>
-<tw-passagedata pid="5" name="StoryInit" tags="" position="155,86">&lt;&lt;set $recipe to []&gt;&gt;</tw-passagedata>
+[[Add dragon scales.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://elderscrolls.wikia.com/wiki/Dragon_Scales&quot;&gt;[?]&lt;/a&gt;&lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="5" name="StoryInit" tags="" position="155,86">&lt;&lt;set $recipe to []&gt;&gt;
+&lt;&lt;set $poison to false&gt;&gt;
+&lt;&lt;set $wine to 0&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="6" name="RecipeList" tags="widget" position="316,86">&lt;&lt;widget &quot;RecipeList&quot;&gt;&gt;&lt;&lt;if $recipe&gt;&gt;&lt;&lt;set $recipe.push(passage())&gt;&gt;&lt;&lt;for $i to 0; $i lt $recipe.length; $i++&gt;&gt;&lt;&lt;print ($i+1) + &quot;. &quot; + $recipe[$i]+&quot;&lt;br/&gt;&quot;&gt;&gt;&lt;&lt;/for&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="7" name="Add salt." tags="food magic" position="501,577">&lt;&lt;RecipeList&gt;&gt;
+<tw-passagedata pid="7" name="Add salt." tags="food magic" position="499,574">&lt;&lt;RecipeList&gt;&gt;
 
-[[Sprinkle fairy dust.]]
+[[Sprinkle fairy dust.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://www.orientaltrading.com/web/browse/processProductsCatalog?Nrpp=10000&amp;sku=13598880&amp;BP=PS490&quot;&gt;[?]&lt;/a&gt;
 
-[[Add a dragon scale.]]
+[[Add dragon scales.]]       &lt;a target=&quot;_blank&quot;  href=&quot;http://elderscrolls.wikia.com/wiki/Dragon_Scales&quot;&gt;[?]&lt;/a&gt;
 
-[[Add potatoes!]]</tw-passagedata>
-<tw-passagedata pid="8" name="Add three drops of blood." tags="creepy" position="651,577">&lt;&lt;RecipeList&gt;&gt;
+[[Add potatoes!]]&lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="8" name="Add three drops of blood." tags="creepy blood" position="651,575">&lt;&lt;RecipeList&gt;&gt;
 
-[[Grind dragon bone into dust and sprinkle.]]
+[[Grind dragon bone into dust and sprinkle.]]       &lt;a target=&quot;_blank&quot;  href=&quot;http://runescape.wikia.com/wiki/Dragon_bones&quot;&gt;[?]&lt;/a&gt;
 
-[[Add a bloodbeetle.]]
+[[Add a bloodbeetle.]]       &lt;a target=&quot;_blank&quot;  href=&quot;http://starwars.wikia.com/wiki/Blood_beetle&quot;&gt;[?]&lt;/a&gt;
 
-[[Cut up some onion.]]</tw-passagedata>
-<tw-passagedata pid="9" name="Add bat wings." tags="magic creepy" position="801,577">Double-click this passage to edit it.</tw-passagedata>
-<tw-passagedata pid="10" name="Add lizard eyes." tags="" position="1055,334">Double-click this passage to edit it.</tw-passagedata>
-<tw-passagedata pid="11" name="Add dragon scales." tags="" position="954,579">Double-click this passage to edit it.</tw-passagedata>
-<tw-passagedata pid="12" name="Sprinkle fairy dust." tags="magic" position="501,727">&lt;&lt;RecipeList&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="13" name="Add a dragon scale." tags="magic" position="651,727">Double-click this passage to edit it.</tw-passagedata>
-<tw-passagedata pid="14" name="Add potatoes!" tags="food nonsense" position="376,727">&lt;&lt;RecipeList&gt;&gt;
+[[Cut up some onion.]]
+
+[[Add unicorn blood.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://harrypotter.wikia.com/wiki/Unicorn_blood&quot;&gt;[?]&lt;/a&gt; &lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="9" name="Add bat wings." tags="magic creepy" position="800,578">&lt;&lt;RecipeList&gt;&gt;
+
+[[Add unicorn tears.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://www.wired.co.uk/news/archive/2015-09/17/unicorns-tears-gin-made-of-sorrow&quot;&gt;[?]&lt;/a&gt;
+
+Who uses just tears nowadays? [[Add unicorn blood.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://harrypotter.wikia.com/wiki/Unicorn_blood&quot;&gt;[?]&lt;/a&gt;
+
+What do people have against unicorns? [[Just add a regular old bag of poisonous mushroom powder.]]
+
+Do you think I&#39;m an idiot? [[Add mandragora roots.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://www.sacredearth.com/ethnobotany/plantprofiles/mandrake.php&quot;&gt;[?]&lt;/a&gt;&lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="10" name="Add lizard eyes." tags="magic" position="1055,334">&lt;&lt;RecipeList&gt;&gt;
+
+[[Add dragon scales.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://elderscrolls.wikia.com/wiki/Dragon_Scales&quot;&gt;[?]&lt;/a&gt;
+
+[[Add mandragora roots.]]         &lt;a target=&quot;_blank&quot;  href=&quot;http://www.sacredearth.com/ethnobotany/plantprofiles/mandrake.php&quot;&gt;[?]&lt;/a&gt;
+
+[[Add unicorn tears.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://www.wired.co.uk/news/archive/2015-09/17/unicorns-tears-gin-made-of-sorrow&quot;&gt;[?]&lt;/a&gt;</tw-passagedata>
+<tw-passagedata pid="11" name="Add dragon scales." tags="dragon" position="1582,366">&lt;&lt;RecipeList&gt;&gt;
+
+[[Grind dragon bone into dust and sprinkle.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://runescape.wikia.com/wiki/Dragon_bones&quot;&gt;[?]&lt;/a&gt;
+
+[[Add liquid fire.]]        &lt;a target=&quot;_blank&quot;  href=&quot;https://br.pinterest.com/pin/3870349654244787/&quot;&gt;[?]&lt;/a&gt;
+
+[[Add a bloodbeetle.]]      &lt;a target=&quot;_blank&quot;  href=&quot;http://starwars.wikia.com/wiki/Blood_beetle&quot;&gt;[?]&lt;/a&gt; &lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="12" name="Sprinkle fairy dust." tags="magic" position="501,727">&lt;&lt;RecipeList&gt;&gt;
+
+[[Add leek.]] 
+
+[[Add bat wings.]] 
+
+[[Add three drops of blood.]] &lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="13" name="Add potatoes!" tags="food nonsense" position="376,727">&lt;&lt;RecipeList&gt;&gt;
+
+[[Add some poisonous mushroom powder.|Just add a regular old bag of poisonous mushroom powder.]] 
 
 [[Wait for it to boil.]]</tw-passagedata>
-<tw-passagedata pid="15" name="Grind dragon bone into dust and sprinkle." tags="creepy" position="783,882">&lt;&lt;RecipeList&gt;&gt;
+<tw-passagedata pid="14" name="Grind dragon bone into dust and sprinkle." tags="creepy magic dragon" position="1584,847">&lt;&lt;RecipeList&gt;&gt;
 
-[[Wait for it to boil.]] </tw-passagedata>
-<tw-passagedata pid="16" name="Add a bloodbeetle." tags="" position="801,727">Double-click this passage to edit it.</tw-passagedata>
-<tw-passagedata pid="17" name="Cut up some onion." tags="food nonsense" position="951,728">&lt;&lt;AddItem&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;set $recipe.push(&quot;Cry like crazy.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Blame the ninjas and add to cauldron.&quot;)&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;List&gt;&gt;
+[[Add dragon scales.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://elderscrolls.wikia.com/wiki/Dragon_Scales&quot;&gt;[?]&lt;/a&gt;
+
+[[Add a bloodbeetle.]]       &lt;a target=&quot;_blank&quot;  href=&quot;http://starwars.wikia.com/wiki/Blood_beetle&quot;&gt;[?]&lt;/a&gt;
+
+[[Add unicorn tears.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://www.wired.co.uk/news/archive/2015-09/17/unicorns-tears-gin-made-of-sorrow&quot;&gt;[?]&lt;/a&gt; &lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="15" name="Add a bloodbeetle." tags="blood" position="801,727">&lt;&lt;RecipeList&gt;&gt;
+
+[[Add unicorn blood.]]         &lt;a target=&quot;_blank&quot;  href=&quot;http://harrypotter.wikia.com/wiki/Unicorn_blood&quot;&gt;[?]&lt;/a&gt;
+
+[[Add lizard eyes.]]        &lt;a target=&quot;_blank&quot;  href=&quot;https://en.wikivet.net/Lizard_Eye&quot;&gt;[?]&lt;/a&gt;
+
+[[Add liquid fire.]] 
+
+[[Sprinkle fairy dust.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://www.orientaltrading.com/web/browse/processProductsCatalog?Nrpp=10000&amp;sku=13598880&amp;BP=PS490&quot;&gt;[?]&lt;/a&gt; &lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="16" name="Cut up some onion." tags="food nonsense" position="951,728">&lt;&lt;AddItem&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;set $recipe.push(&quot;Cry like crazy.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Blame the ninjas and add to cauldron.&quot;)&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;List&gt;&gt;
 
 [[Add potatoes!]] 
 
-[[Add lizard eyes.]] 
+[[Add lizard eyes.]]        &lt;a target=&quot;_blank&quot;  href=&quot;https://en.wikivet.net/Lizard_Eye&quot;&gt;[?]&lt;/a&gt;
 
-[[Add leek.]]</tw-passagedata>
-<tw-passagedata pid="18" name="Add leek." tags="food nonsense" position="953,877">Double-click this passage to edit it.</tw-passagedata>
-<tw-passagedata pid="19" name="Wait for it to boil." tags="" position="361,873">&lt;&lt;AddItem&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;if visitedTags(&quot;food&quot;) eq (turns()-2)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Enjoy the yummy soup.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;elseif visitedTags(&quot;creepy&quot;) gt visitedTags(&quot;magic&quot;) and visitedTags(&quot;nonsense&quot;) eq 0&gt;&gt;&lt;&lt;set $recipe.push(&quot;Summon Cthlhu.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Witness the end of mankind as we know it.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;elseif visitedTags(&quot;alcohol&quot;) gt 2&gt;&gt;&lt;&lt;set $recipe.push(&quot;Keep adding more and more alcohol.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Get the professor to stick you in Alcoholics Anonymous.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;set $recipe.push(&quot;Choke on the stench.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Blame the textbook.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;
+[[Add leek.]]&lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="17" name="Add leek." tags="food nonsense" position="953,876">&lt;&lt;RecipeList&gt;&gt;
+
+[[Add some poisonous mushroom powder.|Just add a regular old bag of poisonous mushroom powder.]] 
+
+[[Wait for it to boil.]]</tw-passagedata>
+<tw-passagedata pid="18" name="Wait for it to boil." tags="" position="361,886">&lt;&lt;AddItem&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;if visitedTags(&quot;alcohol&quot;) gte 1 and $liquidfire eq true&gt;&gt;&lt;&lt;set $recipe.push(&quot;Blow up the room. What did you expect?&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Die.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;elseif visitedTags(&quot;food&quot;) eq (turns()-2) or visitedTags(&quot;food&quot;) eq (turns()-3) and $poison eq true&gt;&gt;&lt;&lt;if $poison eq true&gt;&gt;&lt;&lt;set $recipe.push(&quot;You know the teacher is going to taste that right?&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Well that was dark.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Teacher is dead.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Go to jail.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;set $recipe.push(&quot;Enjoy the yummy soup.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;elseif visitedTags(&quot;blood&quot;) gte (turns()-3)&gt;&gt;&lt;&lt;set $recipe.push(&quot;What, do you want to be a vampire or something?&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Teacher bites you.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Live forever.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class forever.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;elseif visitedTags(&quot;dragon&quot;) gte visitedTags(&quot;creepy&quot;) and visitedTags(&quot;dragon&quot;) gte visitedTags(&quot;magic&quot;) and visitedTags(&quot;dragon&quot;) gte 3 and $liquidfire eq true&gt;&gt;&lt;&lt;set $recipe.push(&quot;Make a dragon shapeshifting potion!&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Teacher thinks you cheated.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;elseif visitedTags(&quot;creepy&quot;) gt visitedTags(&quot;magic&quot;) and visitedTags(&quot;nonsense&quot;) eq 0&gt;&gt;&lt;&lt;set $recipe.push(&quot;Summon Cthulhu.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Witness the end of mankind as we know it.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;elseif visitedTags(&quot;alcohol&quot;) gt 2&gt;&gt;&lt;&lt;set $recipe.push(&quot;Keep adding more and more alcohol.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Get the professor to stick you in Alcoholics Anonymous.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;elseif visitedTags(&quot;nonsense&quot;) eq 0 and turns() gt 5&gt;&gt;&lt;&lt;set $recipe.push(&quot;Actually make a simple night vision potion!&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Get a C+.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Pass potions class!&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;set $recipe.push(&quot;Choke on the stench.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Blame the textbook.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;List&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="20" name="List" tags="widget" position="500,79">&lt;&lt;widget &quot;List&quot;&gt;&gt;&lt;&lt;if $recipe&gt;&gt;&lt;&lt;for $i to 0; $i lt $recipe.length; $i++&gt;&gt;&lt;&lt;print ($i+1) + &quot;. &quot; + $recipe[$i]+&quot;&lt;br/&gt;&quot;&gt;&gt;&lt;&lt;/for&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="21" name="AddItem" tags="widget" position="664,82">&lt;&lt;widget &quot;AddItem&quot;&gt;&gt;&lt;&lt;if $recipe&gt;&gt;&lt;&lt;set $recipe.push(passage())&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="22" name="Add wine!" tags="alcohol" position="841,260">&lt;&lt;RecipeList&gt;&gt;
+<tw-passagedata pid="19" name="List" tags="widget" position="500,79">&lt;&lt;widget &quot;List&quot;&gt;&gt;&lt;&lt;if $recipe&gt;&gt;&lt;&lt;for $i to 0; $i lt $recipe.length; $i++&gt;&gt;&lt;&lt;print ($i+1) + &quot;. &quot; + $recipe[$i]+&quot;&lt;br/&gt;&quot;&gt;&gt;&lt;&lt;/for&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="20" name="AddItem" tags="widget" position="664,82">&lt;&lt;widget &quot;AddItem&quot;&gt;&gt;&lt;&lt;if $recipe&gt;&gt;&lt;&lt;set $recipe.push(passage())&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="21" name="Add wine!" tags="alcohol" position="844,262">&lt;&lt;silently&gt;&gt;&lt;&lt;set $wine to $wine + 1&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;RecipeList&gt;&gt;
 That&#39;s not enough. [[Add more wine!|Add wine!]]
 
-[[Add liquid fire.]]
+&lt;&lt;if $wine lt 3&gt;&gt;[[Add liquid fire.]]       &lt;a target=&quot;_blank&quot;  href=&quot;https://br.pinterest.com/pin/3870349654244787/&quot;&gt;[?]&lt;/a&gt;
 
-[[Pour water into cauldron.]] 
+&lt;&lt;/if&gt;&gt;[[Pour water into cauldron.]] 
 
-[[Add lizard eyes.]] 
+[[Add lizard eyes.]]       &lt;a target=&quot;_blank&quot;  href=&quot;https://en.wikivet.net/Lizard_Eye&quot;&gt;[?]&lt;/a&gt; &lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="22" name="Add liquid fire." tags="dragon" position="1109,174">&lt;&lt;silently&gt;&gt;&lt;&lt;set $liquidfire to true&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;if visitedTags(&quot;alcohol&quot;) gte 1&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;set $liquidfire to true&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;AddItem&gt;&gt;&lt;&lt;set $recipe.push(&quot;Blow up the room. What did you expect?&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Die.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;List&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;RecipeList&gt;&gt;
 
-&lt;&lt;if turns() gt 3&gt;&gt;[[Wait for it to boil.]]&lt;&lt;/if&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="23" name="Add liquid fire." tags="" position="1132,189">&lt;&lt;AddItem&gt;&gt;&lt;&lt;set $recipe.push(&quot;Blow up the room. What did you expect?&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;Die.&quot;)&gt;&gt;&lt;&lt;set $recipe.push(&quot;&lt;em&gt;Fail potions class.&lt;/em&gt;&quot;)&gt;&gt;&lt;&lt;List&gt;&gt;</tw-passagedata>
+[[Add bat wings.]] 
+
+[[Add dragon scales.]]        &lt;a target=&quot;_blank&quot;  href=&quot;http://elderscrolls.wikia.com/wiki/Dragon_Scales&quot;&gt;[?]&lt;/a&gt;
+
+[[Add salt.]] &lt;&lt;Boil&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="23" name="Add unicorn tears." tags="magic" position="633,917">&lt;&lt;RecipeList&gt;&gt;
+
+[[Add three drops of blood.]] 
+
+[[Add liquid fire.]]        &lt;a target=&quot;_blank&quot;  href=&quot;https://br.pinterest.com/pin/3870349654244787/&quot;&gt;[?]&lt;/a&gt;
+
+[[Add lizard eyes.]]       &lt;a target=&quot;_blank&quot;  href=&quot;https://en.wikivet.net/Lizard_Eye&quot;&gt;[?]&lt;/a&gt; &lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="24" name="Add unicorn blood." tags="blood" position="1179,533">&lt;&lt;RecipeList&gt;&gt;
+
+[[Add three drops of blood.]] 
+
+[[Add bat wings.]] 
+
+[[Add a bloodbeetle.]]       &lt;a target=&quot;_blank&quot;  href=&quot;http://starwars.wikia.com/wiki/Blood_beetle&quot;&gt;[?]&lt;/a&gt;
+
+[[Grind dragon bone into dust and sprinkle.]]       &lt;a target=&quot;_blank&quot;  href=&quot;http://runescape.wikia.com/wiki/Dragon_bones&quot;&gt;[?]&lt;/a&gt; &lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="25" name="Just add a regular old bag of poisonous mushroom powder." tags="" position="1099,725">&lt;&lt;silently&gt;&gt;&lt;&lt;set $poison to true&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;RecipeList&gt;&gt;
+
+[[Wait for it to boil.]] </tw-passagedata>
+<tw-passagedata pid="26" name="Add mandragora roots." tags="magic" position="1251,727">&lt;&lt;RecipeList&gt;&gt;
+
+[[Add liquid fire.]]        &lt;a target=&quot;_blank&quot;  href=&quot;https://br.pinterest.com/pin/3870349654244787/&quot;&gt;[?]&lt;/a&gt;
+
+[[Add bat wings.]] 
+
+[[Add unicorn blood.]]         &lt;a target=&quot;_blank&quot;  href=&quot;http://harrypotter.wikia.com/wiki/Unicorn_blood&quot;&gt;[?]&lt;/a&gt;
+
+&lt;&lt;Boil&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="27" name="Boil" tags="widget" position="796,85">&lt;&lt;widget &quot;Boil&quot;&gt;&gt;&lt;&lt;if turns() gt 3&gt;&gt;
+
+[[Wait for it to boil.]]&lt;&lt;/if&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="28" name="StoryAuthor" tags="" position="135,256">Yara Grassi Gouffon</tw-passagedata>
 </tw-storydata>
 </div>
 	<script id="script-sugarcube" type="text/javascript">
