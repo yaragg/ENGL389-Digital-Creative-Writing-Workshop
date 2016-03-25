@@ -15,17 +15,26 @@ Losso
 	top: 0;
 	right: 0;
 	z-index: -1;
-	-webkit-filter: blur(25px);
+	filter: blur(25px);
+-webkit-filter: blur(25px);
+-moz-filter: blur(25px);
+-o-filter: blur(25px);
+-ms-filter: blur(25px);
+filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='25'%20/></filter></svg>#blur");
+filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='25'); 
+
 }
 
 body{
 	color: black;
 }
 
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">var canvas, ctx;
-var canvasMode, canvasName;
+#passage{
+	margin-top: 20%;
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">var canvas, ctx;
+var canvasMode = "", canvasName;
 var mouse = {};
-//window.onload = initDarkCanvas;
+var grad;
 function getMouse(e){
 	//mouse.x = e.pageX - e.target.offsetLeft;
 	mouse.x = e.pageX;
@@ -34,31 +43,38 @@ function getMouse(e){
 }
 
 $('body').prepend("<canvas></canvas>");
-//$('body').append('</div>');
-//$('#container').on('mousemove', 'canvas', getMouse);
-//$('#container').mouseover(getMouse);
-//$('canvas').mouseover(getMouse);
-//$('div').mouseover(getMouse);
-//$('p').mouseover(getMouse);
 $(document).mousemove(getMouse);
 $(window).resize(resizeCanvas);
-//$('body').mouseover(getMouse);
-
 
 function resizeCanvas(){
 	canvas.width = window.innerWidth;
-			canvas.height = window.innerHeight;
+	canvas.height = window.innerHeight;
+	createCeilingGradient();
 }
 
-function updateDarkCanvas (){
-	//if(canvasMode != "dark") return;
-	//requestAnimationFrame(updateDarkCanvas);
-	ctx.fillStyle = "black";
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
+function darkCanvas (){
 	ctx.fillStyle = "white";
 	ctx.beginPath();
 	ctx.arc(mouse.x, mouse.y, 125, 0, Math.PI*2, false);
 	ctx.fill();
+}
+
+function black(){
+	ctx.fillStyle = "black";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function createCeilingGradient(){
+	grad = ctx.createRadialGradient(canvas.width/2, 0, 20, 2*canvas.width/3, 2*canvas.height/3, 300);
+	grad = ctx.createRadialGradient(canvas.width/2, 0, 20, canvas.width/2, canvas.height/2+200, 450);
+	
+	grad.addColorStop(0, "black");
+	grad.addColorStop(1, "#ddd");
+}
+
+function ceilingCanvas(){
+	ctx.fillStyle = grad;
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function clearCanvas(){
@@ -66,27 +82,23 @@ function clearCanvas(){
 }
 
 window.initCanvas = function(){	
-	
-	//canvasName = passage.name;
-	//passage.source = "<canvas id='" + canvasName + "'></canvas>" + passage.source;
-	//var pElement = document.querySelector("#passage");
-	//pElement.innerHTML = "<canvas id='" + canvasName + "'></canvas>" + pElement.innerHTML;
-			//canvas = document.querySelector("#"+canvasName);
 	canvas = document.querySelector("canvas");
-	//	passage.source = "blah";
-		//if(canvas){
-			resizeCanvas();
-			//canvas.onmousemove = getMouse;
-			ctx = canvas.getContext("2d");
-			updateCanvas();
-		//}
+	ctx = canvas.getContext("2d");
+	resizeCanvas();
+	updateCanvas();
 }
 
 function updateCanvas(){
 	requestAnimationFrame(updateCanvas);
 
 	if(window.canvasMode=="dark"){
-		updateDarkCanvas();
+		black();
+		darkCanvas();
+	}
+	else if(window.canvasMode == "ceiling"){
+		black();
+		ceilingCanvas();
+		darkCanvas();
 	}
 	else{
 		clearCanvas();
@@ -102,10 +114,10 @@ $(document).ready(initCanvas);</script><tw-passagedata pid="1" name="Intro" tags
 &quot;The One protect us!&quot;
 
 Hearing the shouts somewhere behind you, you [[run into the cave]].
-&lt;% window.canvasMode = &quot;dark&quot;; %&gt;</tw-passagedata>
+&lt;% window.canvasMode = &quot;&quot;; %&gt;</tw-passagedata>
 <tw-passagedata pid="2" name="dead bodies" tags="" position="75,313">&lt;&lt;back&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="3" name="Saybir" tags="" position="200,420">&lt;&lt;back&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="4" name="run into the cave" tags="" position="535,130">You blink into the sudden darkness. A few stray rays of sunlight still filter in from the entrance, but they seem just that: strays. Somehow, even though the mouth of the cave is large and gaping just behind you, light doesn&#39;t seem to belong here. There is something eerie and wrong here and the feeling won&#39;t leave you as you feel around blindly and stumble forward.
+<tw-passagedata pid="4" name="run into the cave" tags="" position="535,130">&lt;% canvasMode = &quot;dark&quot;; %&gt;You blink into the sudden darkness. A few stray rays of sunlight still filter in from the entrance, but they seem just that: strays. Somehow, even though the mouth of the cave is large and gaping just behind you, light doesn&#39;t seem to belong here. There is something eerie and wrong here and the feeling won&#39;t leave you as you feel around blindly and stumble forward.
 
 The stench doesn&#39;t help.
 
@@ -115,11 +127,13 @@ With a sinking feeling, you conjure a ball of light. It shines only briefly, ill
 <tw-passagedata pid="5" name="Charles Losso" tags="" position="95,88">You are Charles Losso, an illusionist from the Mages&#39; Guild in the human realm. You have chocolate brown hair down to your shoulders and golden-brown eyes. Your robes are a deep red marked by golden thread
 
 &lt;&lt;back&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="6" name="Go deeper." tags="" position="769,75">You reach out into the darkness and take a few cautious steps deeper into the cave until your hand finds the cold, rocky wall. Letting your touch guide you, your steps become more confident, and you follow the natural corridor deeper and deeper despite the uneasy feeling that settled in your stomach.
+<tw-passagedata pid="6" name="Go deeper." tags="" position="767,75">
+You reach out into the darkness and take a few cautious steps deeper into the cave until your hand finds the cold, rocky wall. Letting your touch guide you, your steps become more confident, and you follow the natural corridor deeper and deeper despite the uneasy feeling that settled in your stomach.
 
 Everything is quiet, and for the longest time all you can hear is water dropping from--somewhere? You wouldn&#39;t be surprised if it turned out to be blood. Yours is pumping through your ears, your breath short and tense as you worry that at any moment you will start hearing heavy, metallic footfalls behind you.
 
-Eventually the corridor widens into a large, circular room, and you finally feel comfortable enough to send a ball of light into the ceiling and let it stay.</tw-passagedata>
+Eventually the corridor widens into a large, circular room, and you finally feel comfortable enough to send a ball of light into the ceiling and let it stay.
+&lt;% canvasMode = &quot;ceiling&quot;; %&gt;</tw-passagedata>
 <tw-passagedata pid="7" name="StoryMenu" tags="" position="229,13">[[Charles Losso]] </tw-passagedata>
 <tw-passagedata pid="8" name="StoryInit" tags="" position="388,5">&lt;&lt;set $canvas to &quot;false&quot;&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="9" name="PassageHeader" tags="" position="447,354">&lt;canvas&gt;&lt;/canvas&gt;</tw-passagedata>
