@@ -31,6 +31,11 @@ body{
 
 #passage{
 	margin-top: 20%;
+}
+
+.lightSwitch{
+	color:white; 
+	cursor: pointer;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">var canvas, ctx;
 var canvasMode = "", canvasName;
 var mouse = {};
@@ -55,7 +60,7 @@ function resizeCanvas(){
 function darkCanvas (){
 	ctx.fillStyle = "white";
 	ctx.beginPath();
-	ctx.arc(mouse.x, mouse.y, 125, 0, Math.PI*2, false);
+	ctx.arc(mouse.x, mouse.y, 150, 0, Math.PI*2, false);
 	ctx.fill();
 }
 
@@ -91,7 +96,10 @@ window.initCanvas = function(){
 function updateCanvas(){
 	requestAnimationFrame(updateCanvas);
 
-	if(window.canvasMode=="dark"){
+	if(window.canvasMode=="black"){
+		black();
+	}
+	else if(window.canvasMode=="dark"){
 		black();
 		darkCanvas();
 	}
@@ -105,9 +113,19 @@ function updateCanvas(){
 	}
 }
 
+window.switchCanvas = function(e, type){
+	window.canvasMode=type; 
+	e.style.color='black';
+	e.style.cursor='default';
+	e.style.textDecoration='none';
+}
 
+$(window).on('showpassage:after', function (e, data)
+{
+    window.story.checkpoint(data.passage.name);
+});
 
-$(document).ready(initCanvas);</script><tw-passagedata pid="1" name="Intro" tags="" position="328,157">Following a trail of [[dead bodies]] to its source is not the smartest thing you&#39;ve done. But the [[Saybiran|Saybir]] fanatics have followed you all the way here and there is no turning back. You&#39;d rather take your chances with whatever was once here to cause this destruction than face the certainty of a sharp blade and a terrible end burned at the stake.
+$(document).ready(initCanvas);</script><tw-passagedata pid="1" name="Intro" tags="" position="42,416">Following a trail of [[dead bodies]] to its source is not the smartest thing you&#39;ve done. But the [[Saybiran|Saybir]] fanatics have followed you all the way here and there is no turning back. You&#39;d rather take your chances with whatever was once here to cause this destruction than face the certainty of a sharp blade and a terrible end burned at the stake.
 
 &quot;Get the mage!&quot;
 
@@ -115,28 +133,26 @@ $(document).ready(initCanvas);</script><tw-passagedata pid="1" name="Intro" tags
 
 Hearing the shouts somewhere behind you, you [[run into the cave]].
 &lt;% window.canvasMode = &quot;&quot;; %&gt;</tw-passagedata>
-<tw-passagedata pid="2" name="dead bodies" tags="" position="75,313">&lt;&lt;back&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="3" name="Saybir" tags="" position="200,420">&lt;&lt;back&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="4" name="run into the cave" tags="" position="535,130">&lt;% canvasMode = &quot;dark&quot;; %&gt;You blink into the sudden darkness. A few stray rays of sunlight still filter in from the entrance, but they seem just that: strays. Somehow, even though the mouth of the cave is large and gaping just behind you, light doesn&#39;t seem to belong here. There is something eerie and wrong here and the feeling won&#39;t leave you as you feel around blindly and stumble forward.
+<tw-passagedata pid="2" name="dead bodies" tags="" position="51,213">&lt;a href=&quot;javascript:window.history.back();&quot;&gt;Back&lt;/a&gt;</tw-passagedata>
+<tw-passagedata pid="3" name="Saybir" tags="" position="187,217">&lt;a href=&quot;javascript: window.history.back();&quot;&gt;Back&lt;/a&gt;</tw-passagedata>
+<tw-passagedata pid="4" name="run into the cave" tags="" position="375,417">&lt;% canvasMode = &quot;black&quot;; %&gt;You blink into the sudden darkness. A few stray rays of sunlight still filter in from the entrance, but they seem just that: strays. Somehow, even though the mouth of the cave is large and gaping just behind you, light doesn&#39;t seem to belong here. There is something eerie and wrong here and the feeling won&#39;t leave you as you feel around blindly and stumble forward.
 
 The stench doesn&#39;t help.
 
-With a sinking feeling, you conjure a ball of light. It shines only briefly, illuminating the fallen bodies all around you, and you make a mental map of the grisly scene before everything goes dark once again. You don&#39;t want to make it easier for the Saybirans by giving away your location.
+With a sinking feeling, you &lt;span class=&quot;lightSwitch&quot;  onclick=&quot;window.switchCanvas(this, &#39;dark&#39;);&quot;&gt;conjure a ball of light&lt;/span&gt;. It shines only briefly, illuminating the fallen bodies all around you, and you make a mental map of the grisly scene before everything goes dark once again. You don&#39;t want to make it easier for the Saybirans by giving away your location.
 
 [[Go deeper.]]</tw-passagedata>
-<tw-passagedata pid="5" name="Charles Losso" tags="" position="95,88">You are Charles Losso, an illusionist from the Mages&#39; Guild in the human realm. You have chocolate brown hair down to your shoulders and golden-brown eyes. Your robes are a deep red marked by golden thread
+<tw-passagedata pid="5" name="Charles Losso" tags="" position="54,39">You are Charles Losso, an illusionist from the Mages&#39; Guild in the human realm. You have chocolate brown hair down to your shoulders and golden-brown eyes. Your robes are a deep red marked by golden thread
 
 &lt;&lt;back&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="6" name="Go deeper." tags="" position="767,75">
+<tw-passagedata pid="6" name="Go deeper." tags="" position="767,75">&lt;% canvasMode = &quot;dark&quot;; %&gt;
 You reach out into the darkness and take a few cautious steps deeper into the cave until your hand finds the cold, rocky wall. Letting your touch guide you, your steps become more confident, and you follow the natural corridor deeper and deeper despite the uneasy feeling that settled in your stomach.
 
 Everything is quiet, and for the longest time all you can hear is water dropping from--somewhere? You wouldn&#39;t be surprised if it turned out to be blood. Yours is pumping through your ears, your breath short and tense as you worry that at any moment you will start hearing heavy, metallic footfalls behind you.
 
-Eventually the corridor widens into a large, circular room, and you finally feel comfortable enough to send a ball of light into the ceiling and let it stay.
-&lt;% canvasMode = &quot;ceiling&quot;; %&gt;</tw-passagedata>
-<tw-passagedata pid="7" name="StoryMenu" tags="" position="229,13">[[Charles Losso]] </tw-passagedata>
-<tw-passagedata pid="8" name="StoryInit" tags="" position="388,5">&lt;&lt;set $canvas to &quot;false&quot;&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="9" name="PassageHeader" tags="" position="447,354">&lt;canvas&gt;&lt;/canvas&gt;</tw-passagedata>
+Eventually the corridor widens into a large, circular room, and you finally feel comfortable enough to &lt;span class=&quot;lightSwitch&quot; onclick=&quot;window.switchCanvas(this, &#39;ceiling&#39;);&quot;&gt;send a ball of light into the ceiling&lt;/span&gt; and let it stay.
+
+</tw-passagedata>
 </tw-storydata>
 
 
