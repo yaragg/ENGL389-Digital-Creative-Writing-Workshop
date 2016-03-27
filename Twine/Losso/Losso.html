@@ -10,7 +10,20 @@ Losso
 <body>
 <div id="passage"></div>
 
-<tw-storydata name="Losso" startnode="1" creator="Twine" creator-version="2.0.11" ifid="6EF3F74B-056A-4CBB-8ACA-878464461A8C" format="Snowman" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">canvas{
+<tw-storydata name="Losso" startnode="1" creator="Twine" creator-version="2.0.11" ifid="6EF3F74B-056A-4CBB-8ACA-878464461A8C" format="Snowman" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@font-face {
+    font-family: 'sears';
+    src: url('fonts/Sears_Tower-webfont.eot');
+    src: url('fonts/Sears_Tower-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Sears_Tower-webfont.woff') format('woff'),
+         url('fonts/Sears_Tower-webfont.ttf') format('truetype'),
+         url('fonts/Sears_Tower-webfont.svg#sears_towerregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+canvas{
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -21,8 +34,7 @@ Losso
 -o-filter: blur(25px);
 -ms-filter: blur(25px);
 filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='25'%20/></filter></svg>#blur");
-filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='25'); 
-
+filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='25');
 }
 
 body{
@@ -36,6 +48,17 @@ body{
 .lightSwitch{
 	color:white; 
 	cursor: pointer;
+}
+
+.disabled-link{
+	text-decoration: line-through;
+	cursor: default;
+}
+
+.voice-kuni{
+	color: red;
+	font-family: sears, sans;
+	font-size: 200%;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">var canvas, ctx;
 var canvasMode = "", canvasName;
 var mouse = {};
@@ -47,7 +70,7 @@ function getMouse(e){
 	//mouse.y = e.pageY - e.target.offsetTop;
 }
 
-$('body').prepend("<canvas></canvas>");
+$('body').prepend("<link rel='stylesheet' type='text/css' href='css/csshake.min.css' /><canvas></canvas>");
 $(document).mousemove(getMouse);
 $(window).resize(resizeCanvas);
 
@@ -120,22 +143,21 @@ window.switchCanvas = function(e, type){
 	e.style.textDecoration='none';
 }
 
-$(window).on('showpassage:after', function (e, data)
-{
-    window.story.checkpoint(data.passage.name);
-});
-
-$(document).ready(initCanvas);</script><tw-passagedata pid="1" name="Intro" tags="" position="42,416">Following a trail of [[dead bodies]] to its source is not the smartest thing you&#39;ve done. But the [[Saybiran|Saybir]] fanatics have followed you all the way here and there is no turning back. You&#39;d rather take your chances with whatever was once here to cause this destruction than face the certainty of a sharp blade and a terrible end burned at the stake.
+$(document).ready(initCanvas);</script><tw-passagedata pid="1" name="Intro" tags="" position="42,415">Following a trail of [[dead bodies]] to its source is not the smartest thing you&#39;ve done. But the [[Saybiran|Saybir]] fanatics have followed you all the way here and there is no turning back. You&#39;d rather take your chances with whatever was once here to cause this destruction than face the certainty of a sharp blade and a terrible end burned at the stake.
 
 &quot;Get the mage!&quot;
 
 &quot;The One protect us!&quot;
 
 Hearing the shouts somewhere behind you, you [[run into the cave]].
-&lt;% window.canvasMode = &quot;&quot;; %&gt;</tw-passagedata>
-<tw-passagedata pid="2" name="dead bodies" tags="" position="51,213">&lt;a href=&quot;javascript:window.history.back();&quot;&gt;Back&lt;/a&gt;</tw-passagedata>
-<tw-passagedata pid="3" name="Saybir" tags="" position="187,217">&lt;a href=&quot;javascript: window.history.back();&quot;&gt;Back&lt;/a&gt;</tw-passagedata>
-<tw-passagedata pid="4" name="run into the cave" tags="" position="375,417">&lt;% canvasMode = &quot;black&quot;; %&gt;You blink into the sudden darkness. A few stray rays of sunlight still filter in from the entrance, but they seem just that: strays. Somehow, even though the mouth of the cave is large and gaping just behind you, light doesn&#39;t seem to belong here. There is something eerie and wrong here and the feeling won&#39;t leave you as you feel around blindly and stumble forward.
+&lt;% window.canvasMode = &quot;&quot;; walkWord = &quot;walk&quot;; woundedLeg = &quot;false&quot;; paladinSword = &quot;false&quot;; %&gt;</tw-passagedata>
+<tw-passagedata pid="2" name="dead bodies" tags="" position="45,205">These mangled bodies put your nightmares to shame. You would call them the product of a very deranged elementalist, except most of those only stick to a single element. You see a frozen man lying just beside a charred body, and another has been strangled by vines. It makes no sense and you shudder to think of what might have done this.
+
+[[Back|Intro]]</tw-passagedata>
+<tw-passagedata pid="3" name="Saybir" tags="" position="195,203">An extremely religious kingdom devoted to the One. Only white mages and healers are accepted, all other mages are treated with extreme prejudice. You tracked Elrek&#39;s whereabouts to this region of the continent, but it seems foolish now to think that he would ever set foot in a land like this. Crossing into Saybiran borders is a mistake you&#39;ve regretted ever since.
+
+[[Back|Intro]]</tw-passagedata>
+<tw-passagedata pid="4" name="run into the cave" tags="" position="225,417">&lt;% canvasMode = &quot;black&quot;; %&gt;You blink into the sudden darkness. A few stray rays of sunlight still filter in from the entrance, but they seem just that: strays. Somehow, even though the mouth of the cave is large and gaping just behind you, light doesn&#39;t seem to belong here. There is something eerie and wrong here and the feeling won&#39;t leave you as you feel around blindly and stumble forward.
 
 The stench doesn&#39;t help.
 
@@ -145,14 +167,67 @@ With a sinking feeling, you &lt;span class=&quot;lightSwitch&quot;  onclick=&quo
 <tw-passagedata pid="5" name="Charles Losso" tags="" position="54,39">You are Charles Losso, an illusionist from the Mages&#39; Guild in the human realm. You have chocolate brown hair down to your shoulders and golden-brown eyes. Your robes are a deep red marked by golden thread
 
 &lt;&lt;back&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="6" name="Go deeper." tags="" position="767,75">&lt;% canvasMode = &quot;dark&quot;; %&gt;
+<tw-passagedata pid="6" name="Go deeper." tags="" position="404,418">&lt;% canvasMode = &quot;dark&quot;; %&gt;
 You reach out into the darkness and take a few cautious steps deeper into the cave until your hand finds the cold, rocky wall. Letting your touch guide you, your steps become more confident, and you follow the natural corridor deeper and deeper despite the uneasy feeling that settled in your stomach.
 
 Everything is quiet, and for the longest time all you can hear is water dropping from--somewhere? You wouldn&#39;t be surprised if it turned out to be blood. Yours is pumping through your ears, your breath short and tense as you worry that at any moment you will start hearing heavy, metallic footfalls behind you.
 
 Eventually the corridor widens into a large, circular room, and you finally feel comfortable enough to &lt;span class=&quot;lightSwitch&quot; onclick=&quot;window.switchCanvas(this, &#39;ceiling&#39;);&quot;&gt;send a ball of light into the ceiling&lt;/span&gt; and let it stay.
 
-</tw-passagedata>
+[[Look around.]]</tw-passagedata>
+<tw-passagedata pid="7" name="Look around." tags="" position="666,212">&lt;% canvasMode = &quot;ceiling&quot;; %&gt;You are surprised to find that this room has been lived in. There is a makeshift wooden table with some books and a dirty plate, a few bookshelves carved into the stone, and a stock of nonperishable food.
+
+The glint of light on metal catches your eye. Your heart jumps in surprise, but before you can panic, you realize that the suit of armor isn&#39;t moving. It&#39;s a paladin, and you recognize the symbols on his armor from the group that was chasing you earlier. That said, he seems to have been here for a few days at least: the stench says as much, and the blood pooling under his body has already dried out. You see a hole in his chest, tearing right through the plate armor, and the thought that something here actually managed to rip through something that tough is frightening enough on its own. Even worse is the fact that you can&#39;t see anything that looks like it might have done it.
+
+The only way out other than the corridor you just came through seems to be right past the paladin. He is lying right at the entrance of another tunnel.
+
+Maybe the paladin has something you can use. At the very least, whatever killed him could be in store for you, so you should try to find out more. [[Take a closer look.]]
+
+The air is charged with magic. You&#39;d better not touch anything, and that includes suspicious corpses. [[Step around it and continue down the tunnel.|Go down the tunnel.]]</tw-passagedata>
+<tw-passagedata pid="8" name="Take a closer look." tags="" position="605,390">Your hand trembles as you hesitantly reach for the corpse. You grab his shoulder and turn him onto his back, hissing as the putrid smell hits you full on.
+
+Too late, you realize the corpse was lying over a rune carved onto the floor. The movement triggered it, and you see it light up in blue.
+
+[[Oh crap! Duck!]]</tw-passagedata>
+<tw-passagedata pid="9" name="Oh crap! Duck!" tags="" position="605,540">&lt;% woundedLeg = &quot;true&quot;; walkWord=&quot;limp&quot;; %&gt;You cry out and throw yourself to the floor, rolling away from the glyph.
+
+A sharp ice spike shoots out and grazes your leg; if you had been any slower, you might have joined the paladin permanently.
+
+You sit up and pale at the amount of blood, but rip a piece of your robe and manage to bandage up your leg. The gash burns as soon as you put any weight on it, but you know you can&#39;t linger here much longer. You stand on shaky legs, and just as you start to limp away, you catch sight of the paladin&#39;s sword, still in its scabbard.
+
+[[Take the sword.]]
+
+Better travel light. [[Limp down the tunnel.|Go down the tunnel.]]</tw-passagedata>
+<tw-passagedata pid="10" name="Take the sword." tags="" position="606,689">&lt;% paladinSword=&quot;true&quot;; %&gt;Careful to stay as far from the glyph as you can, you take the sword from its sheath. It is just long enough that you can put some weight on it as you walk, and although you&#39;re a little wary of using a sword as a crutch, you manage not to stab your own foot with it.
+
+[[Limp down the tunnel.|Go down the tunnel.]] </tw-passagedata>
+<tw-passagedata pid="11" name="Go down the tunnel." tags="" position="800,385">You dispell the light sphere from the previous room and create another to light up the tunnel. You &lt;% print(walkWord); %&gt; down the tunnel for a while before a voice stops you cold in your tracks. It is a low whisper, a strange mixture of more voices than you can count, and it sounds both distant and eerily close at the same time.
+
+
+&lt;span class=&quot;voice-kuni shake shake-constant&quot;&gt;&quot;Come to me.&quot;&lt;/span&gt;
+
+
+[[&quot;W-Who&#39;s there?!&quot;]]
+
+[[Keep quiet and slowly turn around.]]
+
+&lt;% if(woundedLeg == &quot;false&quot;) print(&quot;[[Run!]]&quot;); 
+else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Run!&lt;/a&gt; &lt;i&gt;(Your wounded leg prevents this.)&lt;/i&gt;&quot;);
+%&gt;</tw-passagedata>
+<tw-passagedata pid="12" name="Run!" tags="" position="1013,397">Whatever it is can&#39;t be good. There is a time and place to stop and talk to creepy voices and now is neither of those. You run desperately down the tunnel, only barely managing not to trip on loose rock or slippery dirt.
+
+Eventually your lungs cry for relief, and you stop and lean against the cave wall, heart thumping in your chest and cold sweat dripping down your neck as you catch your breath. &quot;Oh Eva, the things I do for you.&quot;
+
+[[Continue onward.]] </tw-passagedata>
+<tw-passagedata pid="13" name="&quot;W-Who&#39;s there?!&quot;" tags="" position="802,617">&quot;W-Who&#39;s there?!&quot; you call out, voice rising in panic. &lt;% if(paladinSword==&quot;true&quot;) print(&quot;You wave your sword around in a panic, slashing at the empty air.&quot;); %&gt;
+
+But your hear nothing except the sound of your own heart hammering in your chest.
+
+[[Continue onward.]]</tw-passagedata>
+<tw-passagedata pid="14" name="Keep quiet and slowly turn around." tags="" position="978,539">You freeze up and keep a frightened silence before slowly, slowly turning around. But where you hoped (or feared?) to see something, there is only empty darkness. Your stomach ties itself into a knot as you look around yourself, waving your light sphere around to ward off the dark. &lt;% if(paladinSword==&quot;true&quot;) print(&quot;Your hand clenches tightly around the handle of your sword.&quot;); %&gt;
+
+[[Continue onward.]] </tw-passagedata>
+<tw-passagedata pid="15" name="Continue onward." tags="" position="802,767">Double-click this passage to edit it.</tw-passagedata>
 </tw-storydata>
 
 
