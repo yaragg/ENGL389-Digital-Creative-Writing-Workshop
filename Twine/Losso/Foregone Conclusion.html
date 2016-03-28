@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>
-Losso
+Foregone Conclusion
 </title>
 <meta charset="utf-8">
 <style>a,body{color:#222}body{font:18px "Helvetica Neue",Helvetica,Arial,sans-serif}#passage{max-width:38em;margin:0 auto;line-height:145%}a{text-decoration:none;border-bottom:2px solid #bbb}a:hover{color:#cc8929;border-color:#cc8929}a:active{color:#ffb040;border-color:#ffb040}tw-storydata{display:none}@media screen and (max-device-width:480px){#passage{font-size:70%}}</style>
@@ -10,7 +10,7 @@ Losso
 <body>
 <div id="passage"></div>
 
-<tw-storydata name="Losso" startnode="1" creator="Twine" creator-version="2.0.11" ifid="6EF3F74B-056A-4CBB-8ACA-878464461A8C" format="Snowman" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@font-face {
+<tw-storydata name="Foregone Conclusion" startnode="17" creator="Twine" creator-version="2.0.11" ifid="6EF3F74B-056A-4CBB-8ACA-878464461A8C" format="Snowman" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@font-face {
     font-family: 'sears';
     src: url('fonts/Sears_Tower-webfont.eot');
     src: url('fonts/Sears_Tower-webfont.eot?#iefix') format('embedded-opentype'),
@@ -57,7 +57,7 @@ body{
 
 .voice-kuni{
 	color: red;
-	font-family: sears, sans;
+	font-family: sears, "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .big{
@@ -66,6 +66,10 @@ body{
 
 .black-bg, .black-bg a{
 	color: white;
+}
+
+h1, h2{
+	font-family: sears, "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">var canvas, ctx;
 var canvasMode = "", canvasName;
@@ -280,7 +284,10 @@ You try to block it out, but the further you stumble into the darkness, the loud
 &lt;a href=&quot;https://www.fontsquirrel.com/fonts/sears-tower&quot;&gt;Sears Tower&lt;/a&gt; font by Michael Tension
 
 [[Back|Start]]</tw-passagedata>
-<tw-passagedata pid="17" name="Start" tags="" position="192,707">Welcome! Before we get started:
+<tw-passagedata pid="17" name="Start" tags="" position="192,708">&lt;h1&gt;Foregone Conclusion&lt;/h1&gt;
+&lt;h2&gt;by Yara Grassi Gouffon&lt;/h2&gt;
+
+Welcome! Before we get started:
 
 &lt;ul&gt;
 &lt;li&gt;This is not compatible with phones. Don&#39;t even try, it&#39;s going to look awful.&lt;/li&gt;
@@ -330,15 +337,15 @@ Your mind spins in confusion. Then, it clicks: do they think &lt;i&gt;you&lt;/i&
 <tw-passagedata pid="21" name="Run from the paladin" tags="" position="996,895">&lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;span class=&#39;black-bg&#39;&gt;&quot;); %&gt;You run as fast as you can, hearing the footsteps behind you quicken as the paladin hears you take off. You pray to anyone who will listen that the plate armor will slow him down enough.&lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;/span&gt;&quot;); %&gt;
 
 &lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;span class=&#39;black-bg&#39;&gt;&quot;); %&gt;His footsteps grow distance as you gain on him, but you know it&#39;s only a matter of time until he catches up. Eventually, breathless, you reach [[another room.|Kuni room]]&lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;/span&gt;&quot;); %&gt;</tw-passagedata>
-<tw-passagedata pid="22" name="Grab your sword and swing blindly." tags="" position="978,1182">&lt;span class=&quot;black-bg shake shake-constant&quot;&gt;[[Swing]]&lt;/span&gt;
+<tw-passagedata pid="22" name="Grab your sword and swing blindly." tags="" position="978,1182">&lt;span class=&quot;black-bg shake-hard shake-constant&quot;&gt;[[Swing]]&lt;/span&gt;
 
-&lt;span class=&quot;black-bg shake-little shake-constant&quot; style=&quot;width: 100%; text-align: right;&quot;&gt;[[Swing]]&lt;/span&gt;
+&lt;span class=&quot;black-bg shake shake-constant&quot; style=&quot;width: 100%; text-align: right;&quot;&gt;[[Swing]]&lt;/span&gt;
 
-&lt;span class=&quot;black-bg shake shake-constant&quot; style=&quot;width: 100%; text-align: center;&quot;&gt;[[Swing]]&lt;/span&gt;
+&lt;span class=&quot;black-bg shake-hard shake-constant&quot; style=&quot;width: 100%; text-align: center;&quot;&gt;[[Swing]]&lt;/span&gt;
 
-&lt;span class=&quot;black-bg shake shake-constant&quot;&gt;[[Swing]]&lt;/span&gt;
+&lt;span class=&quot;black-bg shake-hard shake-constant&quot;&gt;[[Swing]]&lt;/span&gt;
 
-&lt;span class=&quot;black-bg shake-little shake-constant&quot; style=&quot;width: 100%; text-align: right;&quot;&gt;[[Swing]]&lt;/span&gt;</tw-passagedata>
+&lt;span class=&quot;black-bg shake shake-constant&quot; style=&quot;width: 100%; text-align: right;&quot;&gt;[[Swing]]&lt;/span&gt;</tw-passagedata>
 <tw-passagedata pid="23" name="Cast a bright light to blind him." tags="" position="1128,1181">&lt;% canvasMode=&quot;&quot;; %&gt;
 You shield your eyes before everything explodes in bright, blinding light. You hear the paladin cry out in pain, and don&#39;t wait around for more.
 
@@ -397,8 +404,29 @@ else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Take your sword and figh
 
 &lt;% if(talkPaladin == &quot;true&quot;) print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Try to talk it out.&lt;/a&gt; &lt;i&gt;(You already know he won&#39;t listen.)&lt;/i&gt;&quot;);
 else print(&quot;[[Try to talk it out.]]&quot;); %&gt;</tw-passagedata>
-<tw-passagedata pid="29" name="Wear the mask." tags="" position="1573,738">&lt;% canvasMode=&quot;torch&quot;; %&gt;</tw-passagedata>
-<tw-passagedata pid="30" name="Take your sword and fight." tags="" position="1592,863">&lt;% canvasMode=&quot;torch&quot;; %&gt;Fighting him head on seems hopeless, but you don&#39;t trust the mask.</tw-passagedata>
+<tw-passagedata pid="29" name="Wear the mask." tags="" position="1573,738">&lt;% canvasMode=&quot;torch&quot;; %&gt;
+You have no other choice. For good or for bad... You surrender your fate to Kuni&#39;s mask.
+
+You feel a thousand voices scream into your ears. Kuni&#39;s voice cuts above the cacophony, cackling gleefully as he makes himself at home in your mind.
+
+You immediately realize this was a mistake.
+
+That is also the last thing &#39;you&#39; realize.
+
+&lt;span class=&quot;voice-kuni&quot;&gt;You feel lightning crackle around your hands like an old friend long forgotten. The paladin screams and twists and &lt;span class=&quot;shake shake-constant&quot;&gt;writhes&lt;/span&gt; and falls limply to the ground like a puppet with broken strings.&lt;/span&gt;
+
+&lt;span class=&quot;voice-kuni&quot;&gt;The paladin is dead &lt;span class=&quot;big&quot;&gt;dead&lt;/span&gt; &lt;span style=&quot;font-size: 300%&quot;&gt;DEAD.&lt;/span&gt;&lt;/span&gt;
+
+&lt;span class=&quot;voice-kuni&quot;&gt;And you are &lt;span class=&quot;shake shake-constant&quot;&gt;back.&lt;/span&gt;&lt;/span&gt;</tw-passagedata>
+<tw-passagedata pid="30" name="Take your sword and fight." tags="" position="1591,863">&lt;% canvasMode=&quot;torch&quot;; %&gt;Fighting him head on seems hopeless, but you don&#39;t trust the mask. You hold your sword tightly and face the paladin.
+
+You keep hoping for a miraculous opening, but either the One really is on the man&#39;s side, or he is just that much more skilled than you. Every time you strike, your blows land on armor or are parried with insulting ease. Eventually, he lunges at you and your stomach bursts in pain.
+
+&lt;span class=&quot;voice-kuni shake shake-constant&quot;&gt;&quot;You know what you have to do.&quot;&lt;/span&gt;
+
+[[Wear the mask.]] 
+
+[[Keep fighting.]]</tw-passagedata>
 <tw-passagedata pid="31" name="this is all a misunderstanding" tags="" position="1128,616">&quot;I swear, this is all a misunderstanding--&quot; Your mind races for an argument that will give him pause. &quot;Those bodies were already there before we ever went in!&quot;
 
 &quot;And you were hardly surprised to see them!&quot;
@@ -462,6 +490,15 @@ You scream at the burning pain in your stomach. Warm blood stains your robe in t
 You are &lt;span class=&quot;shake shake-constant&quot; style=&quot;color:red;&quot;&gt;dead&lt;/span&gt;.
 
 &lt;span class=&quot;voice-kuni&quot; style=&quot;font-size: 150%;&quot;&gt;&quot;Worthless.&quot;&lt;/span&gt;</tw-passagedata>
+<tw-passagedata pid="35" name="Keep fighting." tags="" position="1591,1013">You simply can&#39;t give in. Whatever this mask is, it&#39;s evil. Eva wouldn&#39;t want you to have anything to do with it, no matter the cost.
+
+But the cost is so much more than you could give.
+
+The paladin slashes again, and you fall to your knees, blood soaking your robe. Eva... Eva. This can&#39;t be happening.
+
+You are &lt;span class=&quot;shake shake-constant&quot; style=&quot;color:red;&quot;&gt;dead&lt;/span&gt;.
+
+&lt;span class=&quot;voice-kuni&quot; style=&quot;font-size: 150%;&quot;&gt;&quot;You will never see her again.&quot;&lt;/span&gt;</tw-passagedata>
 </tw-storydata>
 
 
