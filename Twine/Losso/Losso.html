@@ -259,10 +259,10 @@ You reach out into the darkness and take a few cautious steps deeper into the ca
 
 Everything is quiet, and for the longest time all you can hear is water dropping from--somewhere? You wouldn&#39;t be surprised if it turned out to be blood. Yours is pumping through your ears, your breath short and tense as you worry that at any moment you will start hearing heavy, metallic footfalls behind you.
 
-Eventually the corridor widens into a large, circular room, and you finally feel comfortable enough to &lt;span class=&quot;lightSwitch&quot; onclick=&quot;window.switchCanvas(this, &#39;ceiling&#39;);&quot;&gt;send a ball of light into the ceiling&lt;/span&gt; and let it stay.
+Eventually the corridor widens into a large, circular room, and you finally feel comfortable enough to &lt;span class=&quot;lightSwitch&quot; onclick=&quot;window.switchCanvas(this, &#39;ceiling&#39;);&quot;&gt;send a ball of light to the ceiling&lt;/span&gt; and let it stay.
 
 [[Look around.]]</tw-passagedata>
-<tw-passagedata pid="7" name="Look around." tags="" position="666,212">&lt;% canvasMode = &quot;ceiling&quot;; %&gt;You are surprised to find that this room has been lived in. There is a makeshift wooden table with some books and a dirty plate, a few bookshelves carved into the stone, and a stock of nonperishable food.
+<tw-passagedata pid="7" name="Look around." tags="" position="666,212">&lt;% canvasMode = &quot;ceiling&quot;; %&gt;You are surprised to find that this room has been lived in. There is a makeshift wooden table with some books and a dirty plate, a few bookshelves carved into the stone, and a stock of nonperishable food. A few blankets are piled over a rock slab, and you deduce it is supposed to be a bed.
 
 The glint of light on metal catches your eye. Your heart jumps in surprise, but before you can panic, you realize that the suit of armor isn&#39;t moving. It&#39;s a paladin, and you recognize the symbols on his armor from the group that was chasing you earlier. That said, he seems to have been here for a few days at least: the stench says as much, and the blood pooling under his body has already dried out. You see a hole in his chest, tearing right through the plate armor, and the thought that something here actually managed to rip through something that tough is frightening enough on its own. Even worse is the fact that you can&#39;t see anything that looks like it might have done it.
 
@@ -351,7 +351,7 @@ You try to block it out, but the further you stumble into the darkness, the loud
 
 But the voice finally quiets down, and it is something else you hear this time. Something that makes your blood freeze, because you just gave your position away screaming.
 
-Growing louder and louder, the sound of running footsteps and heavy armor echoes down the corridor.
+Growing louder and louder, the sound of running footsteps and heavy armor echoes down the corridor. You don&#39;t have the time to cast an illusion, he&#39;ll be here any second now.
 
 [[Dispell the lights, hide and hope for the best.]]
 
@@ -375,7 +375,9 @@ else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Grab your sword and swin
 else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Run!&lt;/a&gt; &lt;i&gt;(Your wounded leg prevents this.)&lt;/i&gt;&quot;);
 %&gt;&lt;/span&gt;</tw-passagedata>
 <tw-passagedata pid="20" name="Try to talk it out." tags="" position="994,760">Double-click this passage to edit it.</tw-passagedata>
-<tw-passagedata pid="21" name="Run from the paladin" tags="" position="995,895">Double-click this passage to edit it.</tw-passagedata>
+<tw-passagedata pid="21" name="Run from the paladin" tags="" position="996,895">&lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;span class=&#39;black-bg&#39;&gt;&quot;); %&gt;You run as fast as you can, hearing the footsteps behind you quicken as the paladin hears you take off. You pray to anyone who will listen that the plate armor will slow him down enough.&lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;/span&gt;&quot;); %&gt;
+
+&lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;span class=&#39;black-bg&#39;&gt;&quot;); %&gt;His footsteps grow distance as you gain on him, but you know it&#39;s only a matter of time until he catches up. Eventually, breathless, you reach [[another room.|Kuni room]]&lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;/span&gt;&quot;); %&gt;</tw-passagedata>
 <tw-passagedata pid="22" name="Grab your sword and swing blindly." tags="" position="978,1182">&lt;span class=&quot;black-bg shake shake-constant&quot;&gt;[[Swing]]&lt;/span&gt;
 
 &lt;span class=&quot;black-bg shake-little shake-constant&quot; style=&quot;width: 100%; text-align: right;&quot;&gt;[[Swing]]&lt;/span&gt;
@@ -385,8 +387,13 @@ else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Run!&lt;/a&gt; &lt;i&gt;
 &lt;span class=&quot;black-bg shake shake-constant&quot;&gt;[[Swing]]&lt;/span&gt;
 
 &lt;span class=&quot;black-bg shake-little shake-constant&quot; style=&quot;width: 100%; text-align: right;&quot;&gt;[[Swing]]&lt;/span&gt;</tw-passagedata>
-<tw-passagedata pid="23" name="Cast a bright light to blind him." tags="" position="1128,1182">Double-click this passage to edit it.</tw-passagedata>
-<tw-passagedata pid="24" name="Swing" tags="" position="978,1332">&lt;span class=&quot;black-bg&quot;&gt;You take a blind swing at the paladin. The clang of metal against metal is deafening, and the shock of hitting plate armor travels up your arm and shoulder.&lt;/span&gt;
+<tw-passagedata pid="23" name="Cast a bright light to blind him." tags="" position="1128,1181">&lt;% canvasMode=&quot;&quot;; %&gt;
+You shield your eyes before everything explodes in bright, blinding light. You hear the paladin cry out in pain, and don&#39;t wait around for more.
+
+&lt;% if(woundedLeg==&quot;true&quot;) print(&quot;You limp away as fast as you can,&quot;); else print(&quot;You run as fast as you can,&quot;); %&gt; eager to put as much distance behind you as possible.
+
+Eventually the tunnel [[widens into another room.|Kuni room]]</tw-passagedata>
+<tw-passagedata pid="24" name="Swing" tags="" position="978,1332">&lt;span class=&quot;black-bg&quot;&gt;You take a blind swing at the paladin. The clang of metal against metal is deafening, and the shock of hitting plate armor makes you almost drop your sword as it travels up your arm and shoulder.&lt;/span&gt;
 
 &lt;span class=&quot;black-bg&quot;&gt;You are not a fighter. Your swing was wild and unskilled. Now that he knows where you are, the paladin&#39;s is not.&lt;/span&gt;
 
@@ -395,6 +402,33 @@ else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Run!&lt;/a&gt; &lt;i&gt;
 &lt;span class=&quot;black-bg&quot;&gt;You are &lt;span class=&quot;shake shake-constant&quot; style=&quot;color:red;&quot;&gt;dead&lt;/span&gt;.&lt;/span&gt;
 
 &lt;span class=&quot;voice-kuni&quot; style=&quot;font-size: 150%;&quot;&gt;&quot;Worthless.&quot;&lt;/span&gt;</tw-passagedata>
+<tw-passagedata pid="25" name="Kuni room" tags="" position="1241,1006">&lt;% canvasMode=&quot;&quot; %&gt;This room is much smaller than the previous one. A torch still blazes near the center of the room, casting a dim glow on rock walls and earthen floor.
+
+The ground is painted in too many magical circles for you to keep track of, and while most are drawn in chalk or paint, you have a sinking suspicion that some of that dark, dried out brown color may be a mage&#39;s last resort of drawing with their own blood.
+
+Everything around you is chaos: scorch marks, frozen soil and fallen bodies, some of them paladins and others, you realize in surprise, mages themselves.
+
+In the middle of it all is a single [[facedown body]].</tw-passagedata>
+<tw-passagedata pid="26" name="facedown body" tags="" position="1241,872">&lt;span class=&quot;voice-kuni&quot;&gt;&quot;Come.&quot;&lt;/span&gt;
+
+The voice makes you jump again. You look around nervously, but just like before, there is nothing to be found. The room itself seems to be a dead end, and you find your attention inexplicably drawn back to the body.
+
+You guess by the robes that he was a mage, and the closest fallen paladin is still clutching the blade that felled him.
+
+&lt;span class=&quot;voice-kuni&quot;&gt;&quot;You know that one will be here any second now.&quot;&lt;/span&gt; With a sinking feeling, you realize the voice is coming from the corpse.
+
+&lt;% if(woundedLeg==&quot;true&quot;) print(&quot;You approach the corpse very warily, the memories of that hidden rune from before still too fresh in your mind. Your leg throbs as if to complain that you are taking this risk again, but whatever this voice is, you know it has a point. There is no other way out of here, and you do not fancy your chances against the paladin.&quot;);
+
+else print(&quot;You approach the corpse warily, heart beating fast in apprehension, but whatever this voice is, you know it has a point. There is no other way out of here, and you do not fancy your chances against the paladin.&quot;); %&gt;
+
+You reach out and turn the mage&#39;s body over. He is very much dead, and permanently so, despite the paladins&#39; apparent conviction that you are a necromancer. It is then that you realize the voice was not coming from the dead man, but from [[the mask he is still wearing]].</tw-passagedata>
+<tw-passagedata pid="27" name="the mask he is still wearing" tags="" position="1243,740">It is a beautiful thing, elegant patterns intricately carved into  smooth metal. It covers most of the cave, leaving only an opening for the eyes and for the mouth and chin. The edges are made to look like feathers and painted in bright colors, and it reminds you a little of a carnival mask.
+
+You touch its smooth, cold surface, and the voice speaks loud and clear in your mind.
+
+&lt;span class=&quot;voice-kuni&quot;&gt;&quot;Wear me. I can help you.&quot;&lt;/span&gt;
+
+With a start, you wonder if it can somehow read your thoughts.</tw-passagedata>
 </tw-storydata>
 
 
