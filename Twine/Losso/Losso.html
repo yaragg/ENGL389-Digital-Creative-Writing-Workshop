@@ -71,7 +71,7 @@ body{
 var canvasMode = "", canvasName;
 var mouse = {};
 var grad;
-var currVideo, oldVideo, cameraCanvas, videoElement, cameraCtx;
+
 function getMouse(e){
 	//mouse.x = e.pageX - e.target.offsetLeft;
 	mouse.x = e.pageX;
@@ -80,7 +80,6 @@ function getMouse(e){
 }
 
 $('body').prepend("<link rel='stylesheet' type='text/css' href='css/csshake.min.css' /><canvas></canvas>");
-$('body').append("<video></video>");
 $(document).mousemove(getMouse);
 $(window).resize(resizeCanvas);
 
@@ -122,33 +121,6 @@ function clearCanvas(){
 window.initCanvas = function(){	
 	canvas = document.querySelector("canvas");
 	ctx = canvas.getContext("2d");
-	
-	videoElement = document.querySelector("video");
-            cameraCanvas = document.createElement("canvas");
-            cameraCanvas.width = videoElement.clientWidth;
-            cameraCanvas.height = videoElement.clientHeight;
-            cameraCtx = cameraCanvas.getContext("2d");
-            cameraCanvas.style.display = "none";
-
-            if(navigator.webkitGetUserMedia!=null) { 
-                var options = { 
-                    video:true, 
-                    audio:false 
-                    }; 
-                 
-                //request webcam access 
-                navigator.webkitGetUserMedia(options, 
-                    function(stream) { 
-                        //turn the stream into a magic URL 
-                        videoElement.src = window.webkitURL.createObjectURL(stream); 
-                    },
-                    function(e) { 
-                        console.log("error happened"); 
-                        alert("You have navigator.webkitGetUserMedia, but an error occurred");
-                    
-                    } 
-                ); 
-            };
 	resizeCanvas();
 	updateCanvas();
 }
@@ -168,10 +140,6 @@ function updateCanvas(){
 		ceilingCanvas();
 		darkCanvas();
 	}
-	else if(window.canvasMode == "ghost"){
-		black();
-		motionDetection();
-	}
 	else{
 		clearCanvas();
 	}
@@ -185,49 +153,6 @@ window.switchCanvas = function(e, type){
 }
 
 $(document).ready(initCanvas);
-
-function motionDetection(){
-            cameraCtx.drawImage(videoElement, 0, 0, cameraCanvas.width, cameraCanvas.height);
-            var currVideoData = cameraCtx.getImageData(0, 0, cameraCanvas.width, cameraCanvas.height);
-            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            var data = imageData.data;
-            
-            currVideo = currVideoData.data;
-            var length = currVideo.length;
-            var width = currVideo.width;
-            
-            var detectCount = 0;
-
-            if(oldVideo != null){
-                for( var y = 0 ; y < cameraCanvas.height; y++ ) {
-                for( var x = 0 ; x < cameraCanvas.width; x++ ) {
-                
-                    var indexOld = (y * cameraCanvas.width + x) * 4, oldr = oldVideo[indexOld], oldg = oldVideo[indexOld+1], oldb = oldVideo[indexOld+2], olda = oldVideo[indexOld+3];
-                    var indexNew = (y * cameraCanvas.width + x) * 4, r = currVideo[indexNew], g = currVideo[indexNew+1], b = currVideo[indexNew+2], a = currVideo[indexNew+3];
-                    if (oldr > r - 15 || oldg > g - 15 || oldb > b - 15) {
-                    /*
-                        data[indexNew] = 255;
-                        data[indexNew+1] = 255; 
-                        data[indexNew+2] = 255; 
-                        data[indexNew+3] = 255; 
-                        detected = true;
-                        */
-                    } else {
-
-                        data[indexNew] = 247; 
-                        data[indexNew+1] = 109; 
-                        data[indexNew+2] = 183; 
-                        data[indexNew+3] = 0.4*255;
-                        detectCount++;
-                        
-                    }
-                    
-                  } // end for x
-                 } // end for y
-            }
-            oldVideo = currVideo;
-            ctx.putImageData(imageData, 0, 0);
-        }
 </script><tw-passagedata pid="1" name="Intro" tags="" position="42,415">Following a trail of [[dead bodies]] to its source is not the smartest thing you&#39;ve done. But the [[Saybiran|Saybir]] fanatics have followed you all the way here and there is no turning back. You&#39;d rather take your chances with whatever was once here to cause this destruction than face the certainty of a sharp blade and a terrible end burned at the stake.
 
 &quot;Get the mage!&quot;
@@ -235,7 +160,7 @@ function motionDetection(){
 &quot;The One protect us!&quot;
 
 Hearing the shouts somewhere behind you, you [[run into the cave]].
-&lt;% window.canvasMode = &quot;&quot;; walkWord = &quot;walk&quot;; woundedLeg = &quot;false&quot;; paladinSword = &quot;false&quot;; lossoLine = &quot;&quot;; %&gt;</tw-passagedata>
+&lt;% window.canvasMode = &quot;&quot;; walkWord = &quot;walk&quot;; woundedLeg = &quot;false&quot;; paladinSword = &quot;false&quot;; lossoLine = &quot;&quot;; usedLight=&quot;false&quot;; foundKuni = &quot;false&quot;; talkPaladin = &quot;false&quot;; %&gt;</tw-passagedata>
 <tw-passagedata pid="2" name="dead bodies" tags="" position="45,205">These mangled bodies put your nightmares to shame. You would call them the product of a very deranged elementalist, except most of those only stick to a single element. You see a frozen man lying just beside a charred body, and another has been strangled by vines. It makes no sense and you shudder to think of what might have done this.
 
 [[Back|Intro]]</tw-passagedata>
@@ -360,7 +285,7 @@ Growing louder and louder, the sound of running footsteps and heavy armor echoes
 &lt;% if(woundedLeg == &quot;false&quot;) print(&quot;[[Run!|Run from the paladin]]&quot;); 
 else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Run!&lt;/a&gt; &lt;i&gt;(Your wounded leg prevents this.)&lt;/i&gt;&quot;);
 %&gt;</tw-passagedata>
-<tw-passagedata pid="19" name="Dispell the lights, hide and hope for the best." tags="" position="980,1031">&lt;% canvasMode=&quot;black&quot;; %&gt;
+<tw-passagedata pid="19" name="Dispell the lights, hide and hope for the best." tags="" position="980,1031">&lt;% canvasMode=&quot;black&quot;; usedLight=&quot;true&quot;; %&gt;
 &lt;span class=&quot;black-bg&quot;&gt;You press yourself close to the wall and hold your breath. The footsteps come closer, closer, and stop.&lt;/span&gt;
 
 &lt;p class=&quot;black-bg shake-little shake-constant&quot;&gt;Oh crap he&#39;s here.&lt;/p&gt;
@@ -374,7 +299,15 @@ else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Grab your sword and swin
 &lt;span class=&quot;black-bg&quot;&gt;&lt;% if(woundedLeg == &quot;false&quot;) print(&quot;[[Run!|Run from the paladin]]&quot;); 
 else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Run!&lt;/a&gt; &lt;i&gt;(Your wounded leg prevents this.)&lt;/i&gt;&quot;);
 %&gt;&lt;/span&gt;</tw-passagedata>
-<tw-passagedata pid="20" name="Try to talk it out." tags="" position="994,760">Double-click this passage to edit it.</tw-passagedata>
+<tw-passagedata pid="20" name="Try to talk it out." tags="" position="994,760">&lt;% talkPaladin = &quot;true&quot;; %&gt;No matter whether you are an expert warrior or a powerful mage, sometimes a silver tongue can beat any blade and any spell. You hope that is the case this time.
+
+&quot;Wait! Why are you doing this?&quot; you call out in Common tongue. Eva made a point of making you both learn it, and now you are grateful for her foresight. Still, for a moment, you fear the paladin might refuse to speak in anything other than Saybiran.
+
+&quot;You dare ask why after you &lt;i&gt;slaughtered&lt;/i&gt; my brothers, mage?!&quot;
+
+Your mind spins in confusion. Then, it clicks: do they think &lt;i&gt;you&lt;/i&gt; were the one that caused all this destruction? Ha, you wish. Then perhaps his sword wouldn&#39;t look so threatening.
+
+&quot;I had nothing to do with it! I swear, &lt;% if(usedLight==&quot;true&quot;) print(&quot;[[this is all a misunderstanding|used light on paladin]]--&quot;); else print(&quot;[[this is all a misunderstanding]]--&quot;); %&gt;&quot;</tw-passagedata>
 <tw-passagedata pid="21" name="Run from the paladin" tags="" position="996,895">&lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;span class=&#39;black-bg&#39;&gt;&quot;); %&gt;You run as fast as you can, hearing the footsteps behind you quicken as the paladin hears you take off. You pray to anyone who will listen that the plate armor will slow him down enough.&lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;/span&gt;&quot;); %&gt;
 
 &lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;span class=&#39;black-bg&#39;&gt;&quot;); %&gt;His footsteps grow distance as you gain on him, but you know it&#39;s only a matter of time until he catches up. Eventually, breathless, you reach [[another room.|Kuni room]]&lt;% if(canvasMode==&quot;black&quot;) print(&quot;&lt;/span&gt;&quot;); %&gt;</tw-passagedata>
@@ -402,7 +335,7 @@ Eventually the tunnel [[widens into another room.|Kuni room]]</tw-passagedata>
 &lt;span class=&quot;black-bg&quot;&gt;You are &lt;span class=&quot;shake shake-constant&quot; style=&quot;color:red;&quot;&gt;dead&lt;/span&gt;.&lt;/span&gt;
 
 &lt;span class=&quot;voice-kuni&quot; style=&quot;font-size: 150%;&quot;&gt;&quot;Worthless.&quot;&lt;/span&gt;</tw-passagedata>
-<tw-passagedata pid="25" name="Kuni room" tags="" position="1241,1006">&lt;% canvasMode=&quot;&quot; %&gt;This room is much smaller than the previous one. A torch still blazes near the center of the room, casting a dim glow on rock walls and earthen floor.
+<tw-passagedata pid="25" name="Kuni room" tags="" position="1241,1006">&lt;% canvasMode=&quot;&quot;; foundKuni = &quot;true&quot;; %&gt;This room is much smaller than the previous one. A torch still blazes near the center of the room, casting a dim glow on rock walls and earthen floor.
 
 The ground is painted in too many magical circles for you to keep track of, and while most are drawn in chalk or paint, you have a sinking suspicion that some of that dark, dried out brown color may be a mage&#39;s last resort of drawing with their own blood.
 
@@ -411,9 +344,7 @@ Everything around you is chaos: scorch marks, frozen soil and fallen bodies, som
 In the middle of it all is a single [[facedown body]].</tw-passagedata>
 <tw-passagedata pid="26" name="facedown body" tags="" position="1241,872">&lt;span class=&quot;voice-kuni&quot;&gt;&quot;Come.&quot;&lt;/span&gt;
 
-The voice makes you jump again. You look around nervously, but just like before, there is nothing to be found. The room itself seems to be a dead end, and you find your attention inexplicably drawn back to the body.
-
-You guess by the robes that he was a mage, and the closest fallen paladin is still clutching the blade that felled him.
+The voice makes you jump again. You look around nervously, but just like before, there is nothing to be found. The room itself seems to be a dead end, and you find your attention inexplicably drawn back to the body. You guess by the robes that he was a mage, and the closest fallen paladin is still clutching the blade that felled him.
 
 &lt;span class=&quot;voice-kuni&quot;&gt;&quot;You know that one will be here any second now.&quot;&lt;/span&gt; With a sinking feeling, you realize the voice is coming from the corpse.
 
@@ -422,13 +353,96 @@ You guess by the robes that he was a mage, and the closest fallen paladin is sti
 else print(&quot;You approach the corpse warily, heart beating fast in apprehension, but whatever this voice is, you know it has a point. There is no other way out of here, and you do not fancy your chances against the paladin.&quot;); %&gt;
 
 You reach out and turn the mage&#39;s body over. He is very much dead, and permanently so, despite the paladins&#39; apparent conviction that you are a necromancer. It is then that you realize the voice was not coming from the dead man, but from [[the mask he is still wearing]].</tw-passagedata>
-<tw-passagedata pid="27" name="the mask he is still wearing" tags="" position="1243,740">It is a beautiful thing, elegant patterns intricately carved into  smooth metal. It covers most of the cave, leaving only an opening for the eyes and for the mouth and chin. The edges are made to look like feathers and painted in bright colors, and it reminds you a little of a carnival mask.
+<tw-passagedata pid="27" name="the mask he is still wearing" tags="" position="1423,1004">It is a beautiful thing, elegant patterns intricately carved into  smooth metal. It covers most of the cave, leaving only an opening for the eyes and for the mouth and chin. The edges are made to look like feathers and painted in bright colors, and it reminds you a little of a carnival mask.
 
-You touch its smooth, cold surface, and the voice speaks loud and clear in your mind.
+You touch its smooth, cold surface, and a torrent of voices flood your mind. It is overwhelming at first, but they quiet down to whispers, and one voice stands out above the others loud and clear in your mind.
 
 &lt;span class=&quot;voice-kuni&quot;&gt;&quot;Wear me. I can help you.&quot;&lt;/span&gt;
 
-With a start, you wonder if it can somehow read your thoughts.</tw-passagedata>
+&quot;What... What is this?&quot;
+
+You hear it chuckle in your mind.
+
+&lt;span class=&quot;voice-kuni&quot;&gt;&quot;Not &#39;what&#39;, &#39;who&#39;.&quot;&lt;/span&gt; It speaks with the confidence of a cat watching unsuspecting mice scurrying about. &lt;span class=&quot;voice-kuni&quot;&gt;&quot;I am Eliphas Kuni, and I hold the power of a thousand mages.&quot;&lt;/span&gt;
+
+But before you can question its bold claim, once again you hear [[the sound of metallic footsteps]].</tw-passagedata>
+<tw-passagedata pid="28" name="the sound of metallic footsteps" tags="" position="1422,864">You spin around, facing the entrance to the room. Of course the paladin would have found out; there was only one way through the tunnel. And now there is only one way out of the room, and it is through this hulking suit of armor.
+
+&lt;span class=&quot;voice-kuni&quot;&gt;&quot;Need the help of a thousand mages?&quot;&lt;/span&gt; You can&#39;t help but feel that it is mocking you, but as the Saybiran draws closer with his sword at the ready, you know you have to make a decision.
+
+[[Wear the mask.]]
+
+&lt;% if(paladinSword == &quot;true&quot;) print(&quot;[[Take your sword and fight.]]&quot;); 
+else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Take your sword and fight.&lt;/a&gt; &lt;i&gt;(You are unarmed.)&lt;/i&gt;&quot;);
+%&gt;
+
+&lt;% if(talkPaladin == &quot;true&quot;) print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Try to talk it out.&lt;/a&gt; &lt;i&gt;(You already know he won&#39;t listen.)&lt;/i&gt;&quot;);
+else print(&quot;[[Try to talk it out.]]&quot;); %&gt;</tw-passagedata>
+<tw-passagedata pid="29" name="Wear the mask." tags="" position="1573,738">Double-click this passage to edit it.</tw-passagedata>
+<tw-passagedata pid="30" name="Take your sword and fight." tags="" position="1592,863">Fighting him head on seems hopeless, but you don&#39;t trust the mask.</tw-passagedata>
+<tw-passagedata pid="31" name="this is all a misunderstanding" tags="" position="1128,616">&quot;I swear, this is all a misunderstanding--&quot; Your mind races for an argument that will give him pause. &quot;Those bodies were already there before we ever went in!&quot;
+
+&quot;And you were hardly surprised to see them!&quot;
+
+How is this fair? He didn&#39;t even see your reaction! &quot;I&#39;m telling you, I&#39;m just an illusionist, I could never cause this kind of destruction!&quot;
+
+Of course admitting to something as treacherous as casting illusions wasn&#39;t the best idea. You see his grip tighten on the handle of his sword, and you know you have to do something fast.
+
+&lt;% if(foundKuni == &quot;true&quot;) print(&quot;[[Wear the mask.]]&quot;); %&gt;
+
+[[&quot;Didn&#39;t you hear that voice? He&#39;s the one who killed your comrades!&quot;]]
+
+&lt;% if(foundKuni == &quot;false&quot;) print(&quot;[[Cast a bright light to blind him.]]&quot;); %&gt;
+
+&lt;% if(paladinSword == &quot;true&quot; &amp;&amp; foundKuni == &quot;false&quot;) print(&quot;[[Grab your sword and fight.]]&quot;); 
+else if(paladinSword == &quot;true&quot; &amp;&amp; foundKuni == &quot;true&quot;) print(&quot;[[Take your sword and fight.]]&quot;); 
+else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Take your sword and fight.&lt;/a&gt; &lt;i&gt;(You are unarmed.)&lt;/i&gt;&quot;);
+%&gt;
+
+&lt;% if(foundKuni == &quot;false&quot; &amp;&amp; woundedLeg == &quot;false&quot;) print(&quot;[[Run!|Run from the paladin]]&quot;); 
+else if(foundKuni == &quot;false&quot;) print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Run!&lt;/a&gt; &lt;i&gt;(Your wounded leg prevents this.)&lt;/i&gt;&quot;);
+%&gt;</tw-passagedata>
+<tw-passagedata pid="32" name="used light on paladin" tags="" position="1284,726">&quot;I swear, this is all a misunderstanding--&quot;
+
+But the paladin cuts you off. &quot;Do you take me for a fool? You turned your magic on me!&quot;
+
+You wince at that. &quot;I thought you were going to kill me!&quot;
+
+The man gives a triumphant smile at your &#39;confession&#39;. &quot;Then perhaps you know of a reason why I would?&quot;
+
+This is hopeless.
+
+&lt;span class=&quot;voice-kuni&quot;&gt;&quot;Why not give him a &lt;i&gt;real&lt;/i&gt; reason to fear you?&quot;&lt;/span&gt;
+
+[[Wear the mask.]] 
+
+&lt;% if(paladinSword == &quot;true&quot;) print(&quot;[[Take your sword and fight.]]&quot;); 
+else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Take your sword and fight.&lt;/a&gt; &lt;i&gt;(You are unarmed.)&lt;/i&gt;&quot;);
+%&gt;
+
+[[&quot;Didn&#39;t you hear that voice? He&#39;s the one who killed your comrades!&quot;]]</tw-passagedata>
+<tw-passagedata pid="33" name="&quot;Didn&#39;t you hear that voice? He&#39;s the one who killed your comrades!&quot;" tags="" position="1298,536">&quot;Didn&#39;t you hear that voice? He&#39;s the one who killed your comrades!&quot; you cry out in exasperation. &lt;% if(foundKuni==&quot;true&quot;) print(&quot;Can&#39;t he see the mask you&#39;re holding? It&#39;s the only explanation that makes sense: the mage who was wearing it until now must have used it to defend himself from the paladins. How else would a single man kill that many of them?&quot;);
+
+else print(&quot;Maybe you&#39;re bluffing, but you definitely didn&#39;t do it. Who else could it be? All that matters is you&#39;re trying to make the man see reason.&quot;); %&gt;
+
+You see the paladin&#39;s expression change. For a moment, his eyes are filled with pity, and you dare hope he finally understands you.
+
+&quot;Voice? You&#39;ve lost your mind, the One bless your soul.&quot; That is not what you wanted to hear. His expression hardens. &quot;Or you are trying to fool me with your unholy magic. Either way, today is the day you meet Him!&quot;
+
+He is suddenly too close for you to react. Before you have time to do anything else, he runs you through with his sword.
+
+You are &lt;span class=&quot;shake shake-constant&quot; style=&quot;color:red;&quot;&gt;dead&lt;/span&gt;.
+
+&lt;span class=&quot;voice-kuni&quot;&gt;&quot;Should have seen that one coming.&quot;&lt;/span&gt;</tw-passagedata>
+<tw-passagedata pid="34" name="Grab your sword and fight." tags="" position="1209,411">You take a wild swing at the paladin. The clang of metal against metal is deafening, and the shock of hitting plate armor makes you almost drop your sword as it travels up your arm and shoulder.
+
+You are not a fighter. The scuffle is embarrassingly short before you fail to avoid his slash.
+
+You scream at the burning pain in your stomach. Warm blood stains your robe in the darkness. You fall to your knees, and the paladin takes another slash.
+
+You are &lt;span class=&quot;shake shake-constant&quot; style=&quot;color:red;&quot;&gt;dead&lt;/span&gt;.
+
+&lt;span class=&quot;voice-kuni&quot; style=&quot;font-size: 150%;&quot;&gt;&quot;Worthless.&quot;&lt;/span&gt;</tw-passagedata>
 </tw-storydata>
 
 
