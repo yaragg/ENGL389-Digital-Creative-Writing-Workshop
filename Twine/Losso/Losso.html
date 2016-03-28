@@ -58,11 +58,20 @@ body{
 .voice-kuni{
 	color: red;
 	font-family: sears, sans;
+}
+
+.big{
 	font-size: 200%;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">var canvas, ctx;
+}
+
+.black-bg, .black-bg a{
+	color: white;
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">var canvas, ctx;
 var canvasMode = "", canvasName;
 var mouse = {};
 var grad;
+var currVideo, oldVideo, cameraCanvas, videoElement, cameraCtx;
 function getMouse(e){
 	//mouse.x = e.pageX - e.target.offsetLeft;
 	mouse.x = e.pageX;
@@ -71,6 +80,7 @@ function getMouse(e){
 }
 
 $('body').prepend("<link rel='stylesheet' type='text/css' href='css/csshake.min.css' /><canvas></canvas>");
+$('body').append("<video></video>");
 $(document).mousemove(getMouse);
 $(window).resize(resizeCanvas);
 
@@ -112,6 +122,33 @@ function clearCanvas(){
 window.initCanvas = function(){	
 	canvas = document.querySelector("canvas");
 	ctx = canvas.getContext("2d");
+	
+	videoElement = document.querySelector("video");
+            cameraCanvas = document.createElement("canvas");
+            cameraCanvas.width = videoElement.clientWidth;
+            cameraCanvas.height = videoElement.clientHeight;
+            cameraCtx = cameraCanvas.getContext("2d");
+            cameraCanvas.style.display = "none";
+
+            if(navigator.webkitGetUserMedia!=null) { 
+                var options = { 
+                    video:true, 
+                    audio:false 
+                    }; 
+                 
+                //request webcam access 
+                navigator.webkitGetUserMedia(options, 
+                    function(stream) { 
+                        //turn the stream into a magic URL 
+                        videoElement.src = window.webkitURL.createObjectURL(stream); 
+                    },
+                    function(e) { 
+                        console.log("error happened"); 
+                        alert("You have navigator.webkitGetUserMedia, but an error occurred");
+                    
+                    } 
+                ); 
+            };
 	resizeCanvas();
 	updateCanvas();
 }
@@ -131,6 +168,10 @@ function updateCanvas(){
 		ceilingCanvas();
 		darkCanvas();
 	}
+	else if(window.canvasMode == "ghost"){
+		black();
+		motionDetection();
+	}
 	else{
 		clearCanvas();
 	}
@@ -143,18 +184,62 @@ window.switchCanvas = function(e, type){
 	e.style.textDecoration='none';
 }
 
-$(document).ready(initCanvas);</script><tw-passagedata pid="1" name="Intro" tags="" position="42,415">Following a trail of [[dead bodies]] to its source is not the smartest thing you&#39;ve done. But the [[Saybiran|Saybir]] fanatics have followed you all the way here and there is no turning back. You&#39;d rather take your chances with whatever was once here to cause this destruction than face the certainty of a sharp blade and a terrible end burned at the stake.
+$(document).ready(initCanvas);
+
+function motionDetection(){
+            cameraCtx.drawImage(videoElement, 0, 0, cameraCanvas.width, cameraCanvas.height);
+            var currVideoData = cameraCtx.getImageData(0, 0, cameraCanvas.width, cameraCanvas.height);
+            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            var data = imageData.data;
+            
+            currVideo = currVideoData.data;
+            var length = currVideo.length;
+            var width = currVideo.width;
+            
+            var detectCount = 0;
+
+            if(oldVideo != null){
+                for( var y = 0 ; y < cameraCanvas.height; y++ ) {
+                for( var x = 0 ; x < cameraCanvas.width; x++ ) {
+                
+                    var indexOld = (y * cameraCanvas.width + x) * 4, oldr = oldVideo[indexOld], oldg = oldVideo[indexOld+1], oldb = oldVideo[indexOld+2], olda = oldVideo[indexOld+3];
+                    var indexNew = (y * cameraCanvas.width + x) * 4, r = currVideo[indexNew], g = currVideo[indexNew+1], b = currVideo[indexNew+2], a = currVideo[indexNew+3];
+                    if (oldr > r - 15 || oldg > g - 15 || oldb > b - 15) {
+                    /*
+                        data[indexNew] = 255;
+                        data[indexNew+1] = 255; 
+                        data[indexNew+2] = 255; 
+                        data[indexNew+3] = 255; 
+                        detected = true;
+                        */
+                    } else {
+
+                        data[indexNew] = 247; 
+                        data[indexNew+1] = 109; 
+                        data[indexNew+2] = 183; 
+                        data[indexNew+3] = 0.4*255;
+                        detectCount++;
+                        
+                    }
+                    
+                  } // end for x
+                 } // end for y
+            }
+            oldVideo = currVideo;
+            ctx.putImageData(imageData, 0, 0);
+        }
+</script><tw-passagedata pid="1" name="Intro" tags="" position="42,415">Following a trail of [[dead bodies]] to its source is not the smartest thing you&#39;ve done. But the [[Saybiran|Saybir]] fanatics have followed you all the way here and there is no turning back. You&#39;d rather take your chances with whatever was once here to cause this destruction than face the certainty of a sharp blade and a terrible end burned at the stake.
 
 &quot;Get the mage!&quot;
 
 &quot;The One protect us!&quot;
 
 Hearing the shouts somewhere behind you, you [[run into the cave]].
-&lt;% window.canvasMode = &quot;&quot;; walkWord = &quot;walk&quot;; woundedLeg = &quot;false&quot;; paladinSword = &quot;false&quot;; %&gt;</tw-passagedata>
+&lt;% window.canvasMode = &quot;&quot;; walkWord = &quot;walk&quot;; woundedLeg = &quot;false&quot;; paladinSword = &quot;false&quot;; lossoLine = &quot;&quot;; %&gt;</tw-passagedata>
 <tw-passagedata pid="2" name="dead bodies" tags="" position="45,205">These mangled bodies put your nightmares to shame. You would call them the product of a very deranged elementalist, except most of those only stick to a single element. You see a frozen man lying just beside a charred body, and another has been strangled by vines. It makes no sense and you shudder to think of what might have done this.
 
 [[Back|Intro]]</tw-passagedata>
-<tw-passagedata pid="3" name="Saybir" tags="" position="195,203">An extremely religious kingdom devoted to the One. Only white mages and healers are accepted, all other mages are treated with extreme prejudice. You tracked Elrek&#39;s whereabouts to this region of the continent, but it seems foolish now to think that he would ever set foot in a land like this. Crossing into Saybiran borders is a mistake you&#39;ve regretted ever since.
+<tw-passagedata pid="3" name="Saybir" tags="" position="195,203">The kingdom of Saybir is a land dominated by the faith of the One. Only white mages and healers are accepted, all other mages are treated with extreme prejudice. You tracked Elrek&#39;s whereabouts to this region of the continent, but it seems foolish now to think that he would ever set foot in a land like this. Crossing into Saybiran borders is a mistake you&#39;ve regretted ever since.
 
 [[Back|Intro]]</tw-passagedata>
 <tw-passagedata pid="4" name="run into the cave" tags="" position="225,417">&lt;% canvasMode = &quot;black&quot;; %&gt;You blink into the sudden darkness. A few stray rays of sunlight still filter in from the entrance, but they seem just that: strays. Somehow, even though the mouth of the cave is large and gaping just behind you, light doesn&#39;t seem to belong here. There is something eerie and wrong here and the feeling won&#39;t leave you as you feel around blindly and stumble forward.
@@ -164,9 +249,11 @@ The stench doesn&#39;t help.
 With a sinking feeling, you &lt;span class=&quot;lightSwitch&quot;  onclick=&quot;window.switchCanvas(this, &#39;dark&#39;);&quot;&gt;conjure a ball of light&lt;/span&gt;. It shines only briefly, illuminating the fallen bodies all around you, and you make a mental map of the grisly scene before everything goes dark once again. You don&#39;t want to make it easier for the Saybirans by giving away your location.
 
 [[Go deeper.]]</tw-passagedata>
-<tw-passagedata pid="5" name="Charles Losso" tags="" position="54,39">You are Charles Losso, an illusionist from the Mages&#39; Guild in the human realm. You have chocolate brown hair down to your shoulders and golden-brown eyes. Your robes are a deep red marked by golden thread
+<tw-passagedata pid="5" name="Losso" tags="" position="325,583">You are Charles Losso, an illusionist who wanted nothing more than to live in peace with your beloved, the summoner Eva. For a few years, you had just that, and you were happy.
 
-&lt;&lt;back&gt;&gt;</tw-passagedata>
+However, it wasn&#39;t nearly long enough before the man you both feared more than anyone showed himself again. High Mage Elrek has always had an unhealthy fixation on Eva and fleeing the Mages&#39; Guild to escape his reach was one of the reasons you both settled in the newly discovered demon realm. Caught in a conflict that wasn&#39;t your own, Eva was ripped from you and given to Elrek as a reward for an attack against the authorities. You have spent years pursuing them across all corners of the realm, even though you know that even if you managed to find them, you would stand no chance in a duel against Elrek.
+
+Little did you know that [[an unfortunate run in with some paladins from a mage-hating nation|Intro]] would lead you to the power you needed... Or that it would never let you be the same again.</tw-passagedata>
 <tw-passagedata pid="6" name="Go deeper." tags="" position="404,418">&lt;% canvasMode = &quot;dark&quot;; %&gt;
 You reach out into the darkness and take a few cautious steps deeper into the cave until your hand finds the cold, rocky wall. Letting your touch guide you, your steps become more confident, and you follow the natural corridor deeper and deeper despite the uneasy feeling that settled in your stomach.
 
@@ -184,7 +271,7 @@ The only way out other than the corridor you just came through seems to be right
 Maybe the paladin has something you can use. At the very least, whatever killed him could be in store for you, so you should try to find out more. [[Take a closer look.]]
 
 The air is charged with magic. You&#39;d better not touch anything, and that includes suspicious corpses. [[Step around it and continue down the tunnel.|Go down the tunnel.]]</tw-passagedata>
-<tw-passagedata pid="8" name="Take a closer look." tags="" position="605,390">Your hand trembles as you hesitantly reach for the corpse. You grab his shoulder and turn him onto his back, hissing as the putrid smell hits you full on.
+<tw-passagedata pid="8" name="Take a closer look." tags="" position="605,390">Your hand trembles as you hesitantly reach for the corpse. You grab his shoulder and turn him onto his back, hissing through your teeth as the putrid smell hits you full on.
 
 Too late, you realize the corpse was lying over a rune carved onto the floor. The movement triggered it, and you see it light up in blue.
 
@@ -204,7 +291,7 @@ Better travel light. [[Limp down the tunnel.|Go down the tunnel.]]</tw-passageda
 <tw-passagedata pid="11" name="Go down the tunnel." tags="" position="800,385">You dispell the light sphere from the previous room and create another to light up the tunnel. You &lt;% print(walkWord); %&gt; down the tunnel for a while before a voice stops you cold in your tracks. It is a low whisper, a strange mixture of more voices than you can count, and it sounds both distant and eerily close at the same time.
 
 
-&lt;span class=&quot;voice-kuni shake shake-constant&quot;&gt;&quot;Come to me.&quot;&lt;/span&gt;
+&lt;span class=&quot;voice-kuni big shake shake-constant&quot;&gt;&quot;Come to me.&quot;&lt;/span&gt;
 
 
 [[&quot;W-Who&#39;s there?!&quot;]]
@@ -227,7 +314,87 @@ But your hear nothing except the sound of your own heart hammering in your chest
 <tw-passagedata pid="14" name="Keep quiet and slowly turn around." tags="" position="978,539">You freeze up and keep a frightened silence before slowly, slowly turning around. But where you hoped (or feared?) to see something, there is only empty darkness. Your stomach ties itself into a knot as you look around yourself, waving your light sphere around to ward off the dark. &lt;% if(paladinSword==&quot;true&quot;) print(&quot;Your hand clenches tightly around the handle of your sword.&quot;); %&gt;
 
 [[Continue onward.]] </tw-passagedata>
-<tw-passagedata pid="15" name="Continue onward." tags="" position="802,767">Double-click this passage to edit it.</tw-passagedata>
+<tw-passagedata pid="15" name="Continue onward." tags="" position="802,767">You quickly lose track of how long you&#39;ve been &lt;%print(walkWord)%&gt;ing down the tunnel. Every time you manage to calm down, the whisper sends your heart racing again:
+
+&lt;span class=&quot;voice-kuni&quot;&gt;&quot;Come closer.&quot;&lt;/span&gt;
+
+&lt;span class=&quot;voice-kuni shake shake-constant&quot; style=&quot;width: 100%; text-align: right;&quot;&gt;&quot;I know you&#39;re there...&quot;&lt;/span&gt;
+
+&lt;span class=&quot;voice-kuni&quot;&gt;&quot;Almost, almost.&quot;&lt;/span&gt;
+
+You try to block it out, but the further you stumble into the darkness, the louder it seems to get.
+
+&lt;span class=&quot;voice-kuni big shake shake-constant&quot;&gt;&quot;I can give you what you seek.&quot;&lt;/span&gt;
+
+&lt;span class=&quot;voice-kuni shake-hard shake-constant&quot; style=&quot;width: 100%; text-align: right;&quot;&gt;&quot;Only I can.&quot;&lt;/span&gt;
+
+&lt;span onclick=&quot;window.lossoLine=&#39;Leave me alone!&#39;;&quot;&gt;[[&quot;Leave me alone!&quot;|Paladin]]&lt;/span&gt;
+
+&lt;span onclick=&quot;window.lossoLine=&#39;Just shut up already!&#39;;&quot;&gt;[[&quot;Just shut up already!&quot;|Paladin]]&lt;/span&gt;</tw-passagedata>
+<tw-passagedata pid="16" name="Credits" tags="" position="29,638">&lt;a href=&quot;https://elrumordelaluz.github.io/csshake/&quot;&gt;Shake CSS&lt;/a&gt; by elrumordelaluz
+
+&lt;a href=&quot;https://www.fontsquirrel.com/fonts/sears-tower&quot;&gt;Sears Tower&lt;/a&gt; font by Michael Tension
+
+[[Back|Start]]</tw-passagedata>
+<tw-passagedata pid="17" name="Start" tags="" position="192,707">Welcome! Before we get started:
+
+&lt;ul&gt;
+&lt;li&gt;This is not compatible with phones. Don&#39;t even try, it&#39;s going to look awful.&lt;/li&gt;
+&lt;li&gt;Best viewed with Chrome or Firefox. This has not been tested with Safari or Opera.&lt;/li&gt;
+&lt;li&gt;Incompatible with Internet Explorer or Edge. It&#39;s going to look so ugly it&#39;s not even funny.&lt;/li&gt;
+&lt;/ul&gt;
+
+[[Credits]]
+
+[[Start|Losso]]</tw-passagedata>
+<tw-passagedata pid="18" name="Paladin" tags="" position="802,914">You&#39;ve had enough. &quot;&lt;% print(lossoLine); %&gt;&quot; you scream into the darkness.
+
+But the voice finally quiets down, and it is something else you hear this time. Something that makes your blood freeze, because you just gave your position away screaming.
+
+Growing louder and louder, the sound of running footsteps and heavy armor echoes down the corridor.
+
+[[Dispell the lights, hide and hope for the best.]]
+
+[[Try to talk it out.]]
+
+&lt;% if(woundedLeg == &quot;false&quot;) print(&quot;[[Run!|Run from the paladin]]&quot;); 
+else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Run!&lt;/a&gt; &lt;i&gt;(Your wounded leg prevents this.)&lt;/i&gt;&quot;);
+%&gt;</tw-passagedata>
+<tw-passagedata pid="19" name="Dispell the lights, hide and hope for the best." tags="" position="980,1031">&lt;% canvasMode=&quot;black&quot;; %&gt;
+&lt;span class=&quot;black-bg&quot;&gt;You press yourself close to the wall and hold your breath. The footsteps come closer, closer, and stop.&lt;/span&gt;
+
+&lt;p class=&quot;black-bg shake-little shake-constant&quot;&gt;Oh crap he&#39;s here.&lt;/p&gt;
+
+&lt;span class=&quot;black-bg&quot;&gt;&lt;% if(paladinSword == &quot;true&quot;) print(&quot;[[Grab your sword and swing blindly.]]&quot;); 
+else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Grab your sword and swing blindly.&lt;/a&gt; &lt;i&gt;(You are unarmed.)&lt;/i&gt;&quot;);
+%&gt;&lt;/span&gt;
+
+&lt;span class=&quot;black-bg&quot;&gt;[[Cast a bright light to blind him.]]&lt;/span&gt;
+
+&lt;span class=&quot;black-bg&quot;&gt;&lt;% if(woundedLeg == &quot;false&quot;) print(&quot;[[Run!|Run from the paladin]]&quot;); 
+else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Run!&lt;/a&gt; &lt;i&gt;(Your wounded leg prevents this.)&lt;/i&gt;&quot;);
+%&gt;&lt;/span&gt;</tw-passagedata>
+<tw-passagedata pid="20" name="Try to talk it out." tags="" position="994,760">Double-click this passage to edit it.</tw-passagedata>
+<tw-passagedata pid="21" name="Run from the paladin" tags="" position="995,895">Double-click this passage to edit it.</tw-passagedata>
+<tw-passagedata pid="22" name="Grab your sword and swing blindly." tags="" position="978,1182">&lt;span class=&quot;black-bg shake shake-constant&quot;&gt;[[Swing]]&lt;/span&gt;
+
+&lt;span class=&quot;black-bg shake-little shake-constant&quot; style=&quot;width: 100%; text-align: right;&quot;&gt;[[Swing]]&lt;/span&gt;
+
+&lt;span class=&quot;black-bg shake shake-constant&quot; style=&quot;width: 100%; text-align: center;&quot;&gt;[[Swing]]&lt;/span&gt;
+
+&lt;span class=&quot;black-bg shake shake-constant&quot;&gt;[[Swing]]&lt;/span&gt;
+
+&lt;span class=&quot;black-bg shake-little shake-constant&quot; style=&quot;width: 100%; text-align: right;&quot;&gt;[[Swing]]&lt;/span&gt;</tw-passagedata>
+<tw-passagedata pid="23" name="Cast a bright light to blind him." tags="" position="1128,1182">Double-click this passage to edit it.</tw-passagedata>
+<tw-passagedata pid="24" name="Swing" tags="" position="978,1332">&lt;span class=&quot;black-bg&quot;&gt;You take a blind swing at the paladin. The clang of metal against metal is deafening, and the shock of hitting plate armor travels up your arm and shoulder.&lt;/span&gt;
+
+&lt;span class=&quot;black-bg&quot;&gt;You are not a fighter. Your swing was wild and unskilled. Now that he knows where you are, the paladin&#39;s is not.&lt;/span&gt;
+
+&lt;span class=&quot;black-bg&quot;&gt;You scream at the burning pain in your stomach. Warm blood stains your robe in the darkness. You fall to your knees, and the paladin takes another slash.&lt;/span&gt;
+
+&lt;span class=&quot;black-bg&quot;&gt;You are &lt;span class=&quot;shake shake-constant&quot; style=&quot;color:red;&quot;&gt;dead&lt;/span&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;voice-kuni&quot; style=&quot;font-size: 150%;&quot;&gt;&quot;Worthless.&quot;&lt;/span&gt;</tw-passagedata>
 </tw-storydata>
 
 
