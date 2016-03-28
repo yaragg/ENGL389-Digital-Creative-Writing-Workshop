@@ -70,7 +70,7 @@ body{
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">var canvas, ctx;
 var canvasMode = "", canvasName;
 var mouse = {};
-var grad;
+var grad, gradTorch, growth = 150, increment = 25, frameCounter = 0;
 
 function getMouse(e){
 	//mouse.x = e.pageX - e.target.offsetLeft;
@@ -114,6 +114,23 @@ function ceilingCanvas(){
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
+function torch(){
+	ctx.fillStyle = "white";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "#ffdacc";
+	ctx.beginPath();
+	ctx.arc(canvas.width/2, canvas.height/2, 250 + growth, 0, 2*Math.PI, false);
+	ctx.fill();
+	ctx.beginPath();
+	ctx.fillStyle = "#ffffe6";
+	ctx.arc(canvas.width/2, canvas.height/2, 175 + growth, 0, 2*Math.PI, false);
+	ctx.fill();
+	frameCounter = (frameCounter+1)%4;
+	if(frameCounter == 0) growth += increment;
+	if(growth > 200) increment = -7;
+	if(growth < 150) increment = 7;
+}
+
 function clearCanvas(){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
@@ -140,6 +157,9 @@ function updateCanvas(){
 		ceilingCanvas();
 		darkCanvas();
 	}
+	else if (window.canvasMode == "torch"){
+		torch();
+	}
 	else{
 		clearCanvas();
 	}
@@ -152,8 +172,7 @@ window.switchCanvas = function(e, type){
 	e.style.textDecoration='none';
 }
 
-$(document).ready(initCanvas);
-</script><tw-passagedata pid="1" name="Intro" tags="" position="42,415">Following a trail of [[dead bodies]] to its source is not the smartest thing you&#39;ve done. But the [[Saybiran|Saybir]] fanatics have followed you all the way here and there is no turning back. You&#39;d rather take your chances with whatever was once here to cause this destruction than face the certainty of a sharp blade and a terrible end burned at the stake.
+$(document).ready(initCanvas);</script><tw-passagedata pid="1" name="Intro" tags="" position="42,415">Following a trail of [[dead bodies]] to its source is not the smartest thing you&#39;ve done. But the [[Saybiran|Saybir]] fanatics have followed you all the way here and there is no turning back. You&#39;d rather take your chances with whatever was once here to cause this destruction than face the certainty of a sharp blade and a terrible end burned at the stake.
 
 &quot;Get the mage!&quot;
 
@@ -335,7 +354,7 @@ Eventually the tunnel [[widens into another room.|Kuni room]]</tw-passagedata>
 &lt;span class=&quot;black-bg&quot;&gt;You are &lt;span class=&quot;shake shake-constant&quot; style=&quot;color:red;&quot;&gt;dead&lt;/span&gt;.&lt;/span&gt;
 
 &lt;span class=&quot;voice-kuni&quot; style=&quot;font-size: 150%;&quot;&gt;&quot;Worthless.&quot;&lt;/span&gt;</tw-passagedata>
-<tw-passagedata pid="25" name="Kuni room" tags="" position="1241,1006">&lt;% canvasMode=&quot;&quot;; foundKuni = &quot;true&quot;; %&gt;This room is much smaller than the previous one. A torch still blazes near the center of the room, casting a dim glow on rock walls and earthen floor.
+<tw-passagedata pid="25" name="Kuni room" tags="" position="1241,1006">&lt;% canvasMode=&quot;torch&quot;; foundKuni = &quot;true&quot;; %&gt;This room is much smaller than the previous one. A torch still blazes near the center of the room, casting a dim glow on rock walls and earthen floor.
 
 The ground is painted in too many magical circles for you to keep track of, and while most are drawn in chalk or paint, you have a sinking suspicion that some of that dark, dried out brown color may be a mage&#39;s last resort of drawing with their own blood.
 
@@ -378,8 +397,8 @@ else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Take your sword and figh
 
 &lt;% if(talkPaladin == &quot;true&quot;) print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Try to talk it out.&lt;/a&gt; &lt;i&gt;(You already know he won&#39;t listen.)&lt;/i&gt;&quot;);
 else print(&quot;[[Try to talk it out.]]&quot;); %&gt;</tw-passagedata>
-<tw-passagedata pid="29" name="Wear the mask." tags="" position="1573,738">Double-click this passage to edit it.</tw-passagedata>
-<tw-passagedata pid="30" name="Take your sword and fight." tags="" position="1592,863">Fighting him head on seems hopeless, but you don&#39;t trust the mask.</tw-passagedata>
+<tw-passagedata pid="29" name="Wear the mask." tags="" position="1573,738">&lt;% canvasMode=&quot;torch&quot;; %&gt;</tw-passagedata>
+<tw-passagedata pid="30" name="Take your sword and fight." tags="" position="1592,863">&lt;% canvasMode=&quot;torch&quot;; %&gt;Fighting him head on seems hopeless, but you don&#39;t trust the mask.</tw-passagedata>
 <tw-passagedata pid="31" name="this is all a misunderstanding" tags="" position="1128,616">&quot;I swear, this is all a misunderstanding--&quot; Your mind races for an argument that will give him pause. &quot;Those bodies were already there before we ever went in!&quot;
 
 &quot;And you were hardly surprised to see them!&quot;
@@ -402,7 +421,7 @@ else print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Take your sword and figh
 &lt;% if(foundKuni == &quot;false&quot; &amp;&amp; woundedLeg == &quot;false&quot;) print(&quot;[[Run!|Run from the paladin]]&quot;); 
 else if(foundKuni == &quot;false&quot;) print(&quot;&lt;a class=&#39;disabled-link&#39;&gt;Run!&lt;/a&gt; &lt;i&gt;(Your wounded leg prevents this.)&lt;/i&gt;&quot;);
 %&gt;</tw-passagedata>
-<tw-passagedata pid="32" name="used light on paladin" tags="" position="1284,726">&quot;I swear, this is all a misunderstanding--&quot;
+<tw-passagedata pid="32" name="used light on paladin" tags="" position="1284,726">&lt;% canvasMode=&quot;torch&quot;; %&gt;&quot;I swear, this is all a misunderstanding--&quot;
 
 But the paladin cuts you off. &quot;Do you take me for a fool? You turned your magic on me!&quot;
 
