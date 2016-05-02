@@ -10,6 +10,7 @@ map.fitBounds(bounds);
 
 var saymar = L.marker(xy([238.5, 118]));
 saymar.bindPopup("Saymar, Capital of Iteia");
+saymar.bindLabel('Saymar');
 saymar.addTo(map);
 // map.setView([70, 120], 1);
 
