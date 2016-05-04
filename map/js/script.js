@@ -14,3 +14,5 @@ saymar.bindLabel('Saymar');
 saymar.addTo(map);
 // map.setView([70, 120], 1);
 
+var sidebar = L.control.sidebar('sidebar').addTo(map);
+
