@@ -20,26 +20,16 @@ var bounds = [[0, 0], [1000, 1000]];
 var map_image = L.imageOverlay('images/illia_map.png', bounds).addTo(map);
 map.fitBounds(bounds);
 
-var saymar = L.marker(xy([238.5, 118]));
-saymar.bindPopup("Saymar, Capital of Iteia");
-saymar.bindLabel('Saymar');
-// saymar.on('click', yay);
-saymar.addTo(map);
-// map.setView([70, 120], 1);
+// var saymar = L.marker(xy([238.5, 118]));
+// saymar.bindPopup("Saymar, Capital of Iteia");
+// saymar.bindLabel('Saymar');
+// saymar.addTo(map);
 
 var sidebar = L.control.sidebar('sidebar').addTo(map);
 
-// document.querySelector("#sidebar .sidebar-close").onclick = closeSidebar;
 $("#sidebar .sidebar-close").on('click', closeSidebar);
 
-
-// function yay(){
-// 	alert("Yay!");
-
-// }
-
 function closeSidebar(){
-	// document.querySelector("#sidebar .close").style.display = "none";
 	sidebar.close();
 	document.querySelector("#sidebar").style.display = "none";
 }
@@ -58,13 +48,8 @@ function addMarker(obj){
 }
 
 function markerClick(obj){
-	console.log(this);
-	// updateSidebar("story", content);
-	// updateSidebar("location", location);
-	// updateSidebar("profile", profile);
 	updateSidebar(obj);
 	openSidebar();
-	// console.log(marker);
 }
 
 function updateSidebar(obj){
@@ -73,7 +58,6 @@ function updateSidebar(obj){
 	$("#location").find(".title").html(obj.location);
 	$("#profile").find(".title").html(obj.profile);
 
-	// $("#story").children(".sidebar-header").childrenappend();
 	$("#story").children(".pane-content").html(obj.content);
 	$("#location").children(".pane-content").html(locations[obj.location]?locations[obj.location] : "Add this entry to the locations folder.");
 	$("#profile").children(".pane-content").html(profiles[obj.profile]?profiles[obj.profile]:"Add this entry to the profiles folder.");
@@ -94,10 +78,4 @@ function loadMarkers(res){
 	for(var i=0; i<res.profiles.length; i++){
 		profiles[res.profiles[i].title] = res.profiles[i].content;
 	}
-	// $.ajax({
-	// 	url: "../data/",
-	// 	success: function(data){
-	// 		$(data).find()
-	// 	}
-	// });
 }

@@ -2,7 +2,6 @@
 	$dir = new DirectoryIterator(dirname("../data/entries/entries/"));
 	foreach($dir as $file){
 		if(!$file->isDot()){
-			//echo $file->getFilename();
 			$string .= file_get_contents("../data/entries/$file").",";
 		}
 	}
@@ -13,7 +12,6 @@
 	$string = "";
 	foreach($dir as $file){
 		if(!$file->isDot()){
-			//echo $file->getFilename();
 			$string .= file_get_contents("../data/locations/$file").",";
 		}
 	}
@@ -24,7 +22,6 @@
 	$string = "";
 	foreach($dir as $file){
 		if(!$file->isDot()){
-			//echo $file->getFilename();
 			$string .= file_get_contents("../data/profiles/$file").",";
 		}
 	}
